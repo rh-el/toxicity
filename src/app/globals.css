@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 body {
   font-family: "Inter";
   background: 
@@ -14,7 +16,10 @@ body {
     min-width: 100vw;
     min-height: 100vh;
     box-sizing: border-box;
+  padding: 0 1rem 0 1rem;
 }
+
+
 
 .card {
   background: rgba(255, 255, 255, 0.26);
@@ -24,6 +29,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .card-auth {

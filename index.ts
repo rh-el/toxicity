@@ -1,18 +1,12 @@
-import { PrismaClient } from '@prisma/client'
+// const isValidEmail = (str: string): boolean => {
+//   const regex = new RegExp('/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/')
+//   if (regex.test(str)) {
+//     console.log('correspondance')
+//     return true
+//   } else {
+//     console.log('nope')
+//     return false
+//   }
+// }
 
-const prisma = new PrismaClient()
-
-async function main() {
-    const users = await prisma.users.findMany()
-    console.log(users)
-}
-
-main()
-  .then(async () => {
-    await prisma.$disconnect()
-  })
-  .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-  })
+// isValidEmail('some@email.com')

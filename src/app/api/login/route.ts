@@ -3,7 +3,7 @@ import {NextResponse} from "next/server"
 import { generateToken, comparePasswords } from "@/app/utils/utils";
 import dotenv from 'dotenv'
 import { headers } from 'next/headers'
-
+import jwt from 'jsonwebtoken'
 dotenv.config()
   
 declare global {
@@ -12,6 +12,8 @@ declare global {
     }
 }
 BigInt.prototype.toJSON = function () { return Number(this) }
+
+
 
 export async function GET(req: Request) {
 

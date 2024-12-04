@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
 
 export const isValidEmail = (str: string): boolean => {
     const regex = new RegExp(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/)
@@ -36,6 +37,20 @@ export const generateToken = (id: bigint | bigint[]) => {
 	);
 	return token;
 };
+
+export const verifyToken = (token: string | undefined): object => {
+	if (token && process.env.TOKEN_SECRET) {
+		console.log('good')
+
+		jwt.verify(token, process.env.TOKEN_SECRET, function(err, decoded) {
+			if (err) {
+				throw new Error('invalid token')
+			}
+			console.log('good')
+			return decoded	
+		  });
+	}
+}
 
 
 // module.exports = { isValidEmail, isValidUsernamePassword, hashPassword }

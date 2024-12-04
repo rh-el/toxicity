@@ -50,7 +50,6 @@ export default function Register() {
       const data = await response.json();
       const token = data.token;
       Cookies.set("token", token);
-      console.log(Cookies.get("token"));
     } catch (error) {
       console.error(error);
       return error;

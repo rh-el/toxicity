@@ -1,6 +1,7 @@
 import prisma from "@/lib/db/prisma";
 import {NextResponse} from "next/server"
-import { hashPassword } from "@/app/utils/utils";
+import { hashPassword, generateToken } from "@/app/utils/utils";
+import dotenv from 'dotenv'
 
 
 declare global {
@@ -10,16 +11,15 @@ declare global {
 }
 BigInt.prototype.toJSON = function () { return Number(this) }
 
+dotenv.config()
   
 export async function POST(req: Request) {
 
   try {
-
+    console.log(process.env.TOKEN_SECRET)
     const body = await req.json()
 
     const hashedPassword = hashPassword(body.password)
-
-    console.log(hashedPassword)
 
     const newUser = await prisma.users.create({
       data: {
@@ -28,7 +28,8 @@ export async function POST(req: Request) {
           password : hashedPassword,
       },
     })
-    return NextResponse.json(newUser);
+    const token = generateToken(newUser.id)
+    return NextResponse.json({newUser, token});
     } catch (error) {
       console.error(error)
     }

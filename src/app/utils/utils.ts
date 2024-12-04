@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
 
 export const isValidEmail = (str: string): boolean => {
     const regex = new RegExp(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/)
@@ -26,6 +27,15 @@ export const comparePasswords = async (userPassword: string, hashedPassword: str
 		})
 	})
 }
+
+export const generateToken = (id: bigint | bigint[]) => {
+	const token = jwt.sign(
+		{ id: id },
+		process.env.TOKEN_SECRET as string,
+		{ expiresIn: "2 days" }
+	);
+	return token;
+};
 
 
 // module.exports = { isValidEmail, isValidUsernamePassword, hashPassword }

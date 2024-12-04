@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
-import { isValidEmail, isValidUsernamePassword, hashPassword, comparePasswords } from "../utils/utils"
+import { isValidEmail, isValidUsernamePassword } from "../utils/utils"
 
 
 export default function Register() {
@@ -32,6 +32,7 @@ export default function Register() {
       setValidEmail(true)
       setValidUsername(true)
       setValidPassword(true)
+      
 
       const request = await fetch("/api/register", {
         method: "POST",

@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
-import { isValidEmail, isValidUsernamePassword } from "../utils/utils"
+import { isValidEmail, isValidUsernamePassword, hashPassword, comparePasswords } from "../utils/utils"
 
 
 export default function Register() {
@@ -29,16 +29,6 @@ export default function Register() {
         throw new Error('invalid ')
       }
 
-      // if (!isValidUsernamePassword(username)) {
-      //   setValidUsername(false)
-      //   throw new Error('invalid username')
-      // }
-
-      // if (!isValidUsernamePassword(password)) {
-      //   setValidPassword(false)
-      //   throw new Error('invalid password')
-      // }
-  
       setValidEmail(true)
       setValidUsername(true)
       setValidPassword(true)

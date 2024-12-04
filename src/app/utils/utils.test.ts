@@ -1,5 +1,4 @@
-import { isValidEmail } from "./utils"
-import { isValidUsernamePassword } from "./utils"
+import { isValidEmail, isValidUsernamePassword } from "./utils"
 
 
 // test isValidEmail

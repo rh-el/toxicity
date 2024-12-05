@@ -3,6 +3,7 @@
 import { posts } from "@prisma/client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import Like from "./Like";
 
 interface Post extends posts {
   users: { id: bigint; username: string; avatar: string };
@@ -10,6 +11,9 @@ interface Post extends posts {
 
 export default function Home() {
   const [postData, setPostData] = useState<[]>();
+  const [ isLikedByUser, setIsLikedByUser ] = useState<boolean>(false)
+
+  
 
   const getFeed = async () => {
     const response = await fetch("/api/home", {
@@ -31,13 +35,14 @@ export default function Home() {
       <div className="flex flex-col gap-3 w-full">
         {postData?.map((post: Post) => (
           <div key={post.id} className="card card-post">
-            <Image
+            {/* <Image
               width={500}
               height={500}
               src={post.users.avatar}
               alt=""
-            ></Image>
+            ></Image> */}
             {post.content}
+            <Like isLikedByUser={isLikedByUser} />
           </div>
         ))}
       </div>

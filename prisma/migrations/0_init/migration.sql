@@ -5,6 +5,7 @@ CREATE TABLE "comments" (
     "user_id" BIGINT NOT NULL,
     "created_at" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP,
+    "content" TEXT NOT NULL,
 
     CONSTRAINT "comments_pkey" PRIMARY KEY ("id")
 );
@@ -65,6 +66,7 @@ CREATE TABLE "users" (
     "password" VARCHAR NOT NULL,
     "created_at" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP,
+    "avatar" TEXT DEFAULT 'https://jwyjrgwkkaqapgjqjlbb.supabase.co/storage/v1/object/sign/avatars/avatar.webp?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhdmF0YXJzL2F2YXRhci53ZWJwIiwiaWF0IjoxNzMzMzk2Njk5LCJleHAiOjE3NjQ5MzI2OTl9.s_WGrL3Ej4z9-UW5dDkUHwZgAC6fpFdqVWXOpJhYaq0&t=2024-12-05T11%3A04%3A59.556Z',
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );

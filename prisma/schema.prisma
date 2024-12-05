@@ -70,7 +70,7 @@ model users {
   password                                String      @db.VarChar
   created_at                              DateTime    @default(now()) @db.Timestamptz(6)
   updated_at                              DateTime?   @default(now()) @db.Timestamp(6)
-  avatar                                  String?
+  avatar                                  String?     @default("https://jwyjrgwkkaqapgjqjlbb.supabase.co/storage/v1/object/sign/avatars/avatar.webp?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhdmF0YXJzL2F2YXRhci53ZWJwIiwiaWF0IjoxNzMzMzk2Njk5LCJleHAiOjE3NjQ5MzI2OTl9.s_WGrL3Ej4z9-UW5dDkUHwZgAC6fpFdqVWXOpJhYaq0&t=2024-12-05T11%3A04%3A59.556Z")
   comments                                comments[]
   followers_followers_followed_idTousers  followers[] @relation("followers_followed_idTousers")
   followers_followers_following_idTousers followers[] @relation("followers_following_idTousers")

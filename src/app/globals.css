@@ -17,7 +17,6 @@ body {
   min-width: 100vw;
   min-height: 100vh;
   box-sizing: border-box;
-  width: 100%;
 }
 
 .header {
@@ -32,6 +31,7 @@ body {
 .main-container {
   padding: 1rem 1rem 1rem 1rem;
   overflow: scroll;
+  width: 100%;
 }
 
 .card {
@@ -42,6 +42,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  /* width: 100%; */
 }
 
 .card-auth {

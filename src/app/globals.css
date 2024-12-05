@@ -17,18 +17,31 @@ body {
   min-width: 100vw;
   min-height: 100vh;
   box-sizing: border-box;
-  padding: 0 1rem 0 1rem;
+  width: 100%;
+}
+
+.header {
+  background: rgba(255, 255, 255, 0.26);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.main-container {
+  padding: 1rem 1rem 1rem 1rem;
+  overflow: scroll;
 }
 
 .card {
   background: rgba(255, 255, 255, 0.26);
-  backdrop-filter: blur(9px);
-  -webkit-backdrop-filter: blur(9px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
 }
 
 .card-auth {

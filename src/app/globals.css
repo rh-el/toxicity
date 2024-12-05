@@ -46,8 +46,8 @@ body {
 
 .card-auth {
   padding: 2rem 1.5rem 2rem 1.5rem;
-  flex-direction: column;
   gap: 1.25rem;
+  flex-direction: column;
 }
 
 .card-post {

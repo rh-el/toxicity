@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { isValidEmail, isValidUsernamePassword } from "../../utils/utils";
-import { verifyToken } from "../../utils/utils";
 import { FormEvent, useState } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
@@ -19,10 +18,7 @@ export default function Login() {
   // verifyToken needs TOKEN_SECRET to properly work
   // so this function call for verifify token validity has to be called from login/route
   // or make another special route only for this verification?
-  if (verifyToken(Cookies.get('token'))) { 
-    console.log("verify")
-    router.push('/') 
-  }
+
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

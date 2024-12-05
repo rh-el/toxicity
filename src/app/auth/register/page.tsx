@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
-import { isValidEmail, isValidUsernamePassword } from "../utils/utils";
+import { isValidEmail, isValidUsernamePassword } from "../../utils/utils";
 import Cookies from "js-cookie";
 
 export default function Register() {

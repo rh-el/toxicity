@@ -1,38 +1,47 @@
 "use client"
-import { redirect } from "next/navigation"
 
 import { useRouter } from 'next/navigation'
-import { verifyToken } from "./utils/utils"
 import Cookies from "js-cookie"
-import Home from "./home/page"
+import { useEffect, useState } from "react"
 
 export default function Landing() {
 
   const router = useRouter()
-  const token =  Cookies.get('token')
-  console.log(token)
+  // const [isLoading, setIsLoading ] = useState<boolean>(true)
 
-  if (!token) {
+  useEffect(() => {
+    const checkToken = async () => {
+      const token: string | undefined = Cookies.get('token')
+      
+      if (!token) {
+        router.push('/auth/login')
+        return
+      }
 
-    console.log("toktok")
-    // redirect("/auth/login")
-    router.push('/auth/login')
+      try {
+
+        const response = await fetch('/api/token', {
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
+        })
+
+        if (!response.ok) {
+          Cookies.remove('token')
+          router.push('/auth/login')
+          return
+        }
+
+        // setIsLoading(false)
+      } catch (error) {
+        console.error('token verification error: ', error)
+        router.push('/auth/login')
+      }
+    }
+
+    checkToken()
+  }, [router])
     
-  } else {
-    
-    console.log('tok')
-
-
-  }
-
-    // verifyToken()
-
-
-  return (
-    <div className="items-center h-full">
-      <h3 className="font-quicksand font-bold text-3xl p-3">weett</h3>
-      {/* <Home /> */}
-    </div>
-    )
+  return
     
 }

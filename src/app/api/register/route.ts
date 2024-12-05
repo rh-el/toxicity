@@ -16,7 +16,7 @@ dotenv.config()
 export async function POST(req: Request) {
 
   try {
-    console.log(process.env.TOKEN_SECRET)
+
     const body = await req.json()
 
     const hashedPassword = hashPassword(body.password)

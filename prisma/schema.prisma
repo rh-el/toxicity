@@ -14,6 +14,7 @@ model comments {
   user_id    BigInt
   created_at DateTime  @default(now()) @db.Timestamptz(6)
   updated_at DateTime? @default(now()) @db.Timestamp(6)
+  content    String
   posts      posts     @relation(fields: [post_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   users      users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
@@ -69,6 +70,7 @@ model users {
   password                                String      @db.VarChar
   created_at                              DateTime    @default(now()) @db.Timestamptz(6)
   updated_at                              DateTime?   @default(now()) @db.Timestamp(6)
+  avatar                                  String?
   comments                                comments[]
   followers_followers_followed_idTousers  followers[] @relation("followers_followed_idTousers")
   followers_followers_following_idTousers followers[] @relation("followers_following_idTousers")

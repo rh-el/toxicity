@@ -3,7 +3,6 @@ import {NextResponse} from "next/server"
 import { generateToken, comparePasswords } from "@/app/utils/utils";
 import dotenv from 'dotenv'
 import { headers } from 'next/headers'
-import jwt from 'jsonwebtoken'
 dotenv.config()
   
 declare global {

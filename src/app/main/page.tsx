@@ -1,16 +1,20 @@
 "use client";
 
-import { posts } from "@prisma/client";
 import { useEffect, useState } from "react";
 import PostCard from "./PostCard";
 
-
-interface PostType extends posts {
-  users: { id: bigint; username: string; avatar: string };
+interface PostFocus {
+  id: bigint;
+  content: string;
+  users: {
+    id: bigint;
+    username: string;
+    avatar: string;
+  };
 }
 
 export default function Home() {
-  const [postData, setPostData] = useState<PostType[]>();
+  const [postData, setPostData] = useState<PostFocus[]>();
 
   const getFeed = async () => {
     const response = await fetch("/api/home", {
@@ -27,11 +31,10 @@ export default function Home() {
     getFeed();
   }, []);
 
-  
   return (
     <>
       <div className="flex flex-col gap-3 w-full">
-        {postData?.map((post: PostType, index) => (
+        {postData?.map((post: PostFocus, index) => (
           <PostCard key={index} post={post} />
         ))}
       </div>

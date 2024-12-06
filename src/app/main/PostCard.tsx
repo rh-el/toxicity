@@ -1,18 +1,23 @@
 import { useState } from "react";
 import Image from "next/image";
-import { posts } from "@prisma/client";
 import CommentButton from "./CommentButton";
 
 const imageLoader = (src: string, width?: number, quality?: number) => {
   return `${src}?w=${width}&q=${quality}`;
 };
 
-interface PostType extends posts {
-  users: { id: bigint; username: string; avatar: string };
+interface PostFocus {
+  id: bigint;
+  content: string;
+  users: {
+    id: bigint;
+    username: string;
+    avatar: string;
+  };
 }
 
 type Props = {
-  post: PostType;
+  post: PostFocus;
 };
 
 const PostCard = ({ post }: Props) => {

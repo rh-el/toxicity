@@ -9,7 +9,7 @@ const imageLoader = (src: string, width?: number, quality?: number) => {
   return `${src}?w=${width}&q=${quality}`;
 };
 
-interface PostFocus {
+interface PostType {
   id: bigint;
   content: string;
   users: {

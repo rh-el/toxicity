@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import PostCard from "./PostCard";
 
-interface PostFocus {
+interface PostType {
   id: bigint;
   content: string;
   users: {
@@ -14,7 +14,7 @@ interface PostFocus {
 }
 
 export default function Home() {
-  const [postData, setPostData] = useState<PostFocus[]>();
+  const [postData, setPostData] = useState<PostType[]>();
 
   const getFeed = async () => {
     const response = await fetch("/api/home", {
@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <>
       <div className="flex flex-col gap-3 w-full">
-        {postData?.map((post: PostFocus, index) => (
+        {postData?.map((post: PostType, index) => (
           <PostCard key={index} post={post} />
         ))}
       </div>

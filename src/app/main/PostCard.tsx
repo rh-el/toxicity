@@ -64,9 +64,7 @@ const PostCard = ( {post}: Props) => {
               elit. Nam nulla consequatur, earum nostrum corrupti nesciunt
               <div className="flex gap-2 py-2">
                 <Like postId={post.id} handleLike={handleLike} likeStatus={likeStatus} />
-                
                 <CommentButton id={post.id} />
-                <p className="pr-2">123</p>
               </div>
             </div>
         </div>
@@ -74,3 +72,6 @@ const PostCard = ( {post}: Props) => {
     
 
 }
+
+
+export default PostCard

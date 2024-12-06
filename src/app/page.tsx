@@ -32,6 +32,8 @@ export default function Landing() {
           return
         }
 
+        router.push('/main')
+
         // setIsLoading(false)
       } catch (error) {
         console.error('token verification error: ', error)

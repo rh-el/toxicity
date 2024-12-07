@@ -47,7 +47,10 @@ const Like = ({ postId }: Props) => {
           }
           })
           const likeData = await response.json()
-          setLikeStatus(likeData)
+          setLikeStatus({
+            postIsLike: !!likeData.isLikedByUser, 
+            likeCount: likeData.likeCount
+        })
   
           if (likeData.isLikedByUser) {
               colorLike('#ff0000', 0.5)
@@ -96,12 +99,15 @@ const Like = ({ postId }: Props) => {
         }))
         if (!likeStatus.postIsLike) {
             colorLike('#ff0000', 0.5) 
+            // setLikeStatus({postIsLike: !likeStatus.postIsLike, likeCount: likeStatus.likeCount +1})
         } else {
             colorLike('#000000', 1)
+            // setLikeStatus({postIsLike: !likeStatus.postIsLike, likeCount: likeStatus.likeCount -1})
         }
     }
 
     const handleLike = async () => {
+        console.log(likeStatus.postIsLike)
         if (!likeStatus.postIsLike) {
             await likePost(postId)
         } else {
@@ -110,9 +116,13 @@ const Like = ({ postId }: Props) => {
         handleLikeColor()
     }
 
+    // console.log(likeStatus)
+
     useEffect(() => {
         getLikeStatus(postId)
     }, [])
+
+
 
     return (
         <div className="flex items-center justify-center" ref={container} >

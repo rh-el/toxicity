@@ -13,10 +13,9 @@ export async function POST(req: Request) {
             },
         })
         const userId = await userIdFetch.json()
-        console.log(userId.tokenCheck)
 
-        const like = await prisma.likes.create({
-            data: {
+        const like = await prisma.likes.deleteMany({
+            where: {
               post_id: body.post_id,
               user_id: userId.tokenCheck
             },

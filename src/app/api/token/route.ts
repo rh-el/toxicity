@@ -6,12 +6,17 @@ import { decode } from 'punycode'
 
 dotenv.config()
 
-export const verifyToken = (token: string | undefined): string | boolean => {
+type DecodedType = {
+    id: number
+}
+
+export const verifyToken = (token: string | undefined): number | boolean => {
     if (token && process.env.TOKEN_SECRET) {
+        
         try {
 
-            const decoded = jwt.verify(token, process.env.TOKEN_SECRET) as string;
-            return decoded;
+            const decoded = jwt.verify(token, process.env.TOKEN_SECRET) as DecodedType;
+            return decoded.id;
 
         } catch (err) {
 

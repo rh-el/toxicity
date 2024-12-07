@@ -54,7 +54,7 @@ export default function Login() {
       const data = await response.json();
       const token = data.token;
       Cookies.set("token", token);
-      router.push('/home')
+      router.push('/main')
 
     } catch (error) {
       console.error(error);

@@ -4,34 +4,36 @@ import { verifyToken } from "../token/route";
 
 export async function GET(req: Request) {
 
-    // const body = await req.json()
-    const postId = req.headers.get('post-id')
+    const postId = req.headers.get('post_id')
     const formattedPostId = parseInt(postId!)
 
-    // const token = req.headers.get("authorization")?.split(' ')[1]  
-    // const userId = verifyToken(token) as string
-    // console.log(userId)
-    // const formattedUserId = parseInt(userId)
+    const token = req.headers.get("authorization")?.split(' ')[1]  
+    const userId = verifyToken(token) as number
 
-    const userId = req.headers.get('authorization')?.split(' ')[1]
-    const formattedUserId = parseInt(userId!)
-
-
-    console.log(formattedPostId, formattedUserId)
     try {
 
-        const likes = await prisma.likes.findMany({
-            where: {
-                post_id: formattedPostId,
-                user_id: formattedUserId,
-            }
-        })
+        const [ likeStatus, likeCount ] = await prisma.$transaction([
+            prisma.likes.findMany({
+                where: {
+                    user_id: userId,
+                    post_id: formattedPostId
+                }
+            }),
+            prisma.likes.count({
+                where: {
+                    post_id: formattedPostId
+                }
+            })
+        ])
 
-        if (likes.length) {
-            return NextResponse.json({ postIsLike: true });
-        }
+        const isLikedByUser = likeStatus.length ? true : false
 
-        return NextResponse.json({ postIsLike: false });
+        // const likedPostsArr = likedPosts.map((post) => Number(post.post_id))
+
+        return NextResponse.json({ 
+            isLikedByUser: isLikedByUser, 
+            likeCount: likeCount 
+        });
 
         } catch (error) {
             console.error(error)

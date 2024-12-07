@@ -16,34 +16,37 @@ interface PostType extends posts {
 type Props = {
     post: PostType
 }
+
+type LikeStatusType = {
+  postIsLike: boolean;
+  likeCount: number
+}
   
 const PostCard = ( {post}: Props) => {
 
-    const [ isLikedByUser, setIsLikedByUser ] = useState<boolean>(false)
-    const [ likeStatus, setLikeStatus ] = useState<boolean>(false)
+    // const [ isLikedByUser, setIsLikedByUser ] = useState<boolean>(false)
+    // const [ likeStatus, setLikeStatus ] = useState<LikeStatusType>({postIsLike: false, likeCount: 0})
     
-    const handleLike = async (postId: bigint) => {
-        const response = await fetch('/api/like', {
-            method: "POST",
-            headers: {
-                authorization: `Bearer ${Cookies.get('token')}`
-              },
-            body: JSON.stringify({
-                'post-id': postId
-            })
-        })
-        if (!response.ok) {
-            throw new Error("an error occured while liking status");
-        }
-    }
 
-    const getLikeStatus = async (postId: bigint) => {
-        const reponse = await fetch('/api/like-status')
-    }
+
+
+    // const getLikeStatus = async (postId: bigint) => {
+    //   const strId = String(postId)
+    //     const response = await fetch('/api/like-status', {
+    //     headers: {
+    //       authorization: `Bearer ${Cookies.get('token')}`,
+    //       post_id: strId
+    //     }
+    //     })
+    //     const likeData = await response.json()
+    //     // setLikeStatus(likeData)
+    // }
 
     useEffect(() => {
-        handleLike
+      // getLikeStatus(post.id)
+        // handleLike
     })
+
 
 
 
@@ -63,7 +66,7 @@ const PostCard = ( {post}: Props) => {
               {post.content} Lorem ipsum dolor sit amet consectetur adipisicing
               elit. Nam nulla consequatur, earum nostrum corrupti nesciunt
               <div className="flex gap-2 py-2">
-                <Like postId={post.id} handleLike={handleLike} likeStatus={likeStatus} />
+                <Like postId={post.id} />
                 <CommentButton id={post.id} />
               </div>
             </div>

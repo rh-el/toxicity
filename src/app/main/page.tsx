@@ -17,7 +17,6 @@ export default function Home() {
 
   const fetchNextData = async () => {
     try {
-      console.log(lastFetchedId)
 
       const idToFetch = lastFetchedId -1
       const response = await fetch(`/api/next-post/${idToFetch}`)
@@ -59,21 +58,6 @@ export default function Home() {
       // setHasMore(false)
     }
   }
-  
-  
-  // const getLikeStatus = async (postId: bigint) => {
-  // const strId = String(postId)
-  // const response = await fetch('/api/like-status', {
-  //       headers: {
-  //         authorization: `Bearer ${Cookies.get('token')}`,
-  //         post_id: strId
-  //       }
-  //       })
-  //       const likeData = await response.json()
-  //       setLikeStatus(likeData)
-  //   }
-
-      
 
   useEffect(() => {
     fetchFirstPosts()

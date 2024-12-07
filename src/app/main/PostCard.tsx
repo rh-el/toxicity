@@ -17,38 +17,7 @@ type Props = {
     post: PostType
 }
 
-type LikeStatusType = {
-  postIsLike: boolean;
-  likeCount: number
-}
-  
 const PostCard = ( {post}: Props) => {
-
-    // const [ isLikedByUser, setIsLikedByUser ] = useState<boolean>(false)
-    // const [ likeStatus, setLikeStatus ] = useState<LikeStatusType>({postIsLike: false, likeCount: 0})
-    
-
-
-
-    // const getLikeStatus = async (postId: bigint) => {
-    //   const strId = String(postId)
-    //     const response = await fetch('/api/like-status', {
-    //     headers: {
-    //       authorization: `Bearer ${Cookies.get('token')}`,
-    //       post_id: strId
-    //     }
-    //     })
-    //     const likeData = await response.json()
-    //     // setLikeStatus(likeData)
-    // }
-
-    useEffect(() => {
-      // getLikeStatus(post.id)
-        // handleLike
-    })
-
-
-
 
     return (
         <div className="card card-post">

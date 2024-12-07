@@ -1,5 +1,5 @@
-import React from 'react';
-import { useRef, useState, useEffect } from 'react';
+import React, { SetStateAction } from 'react';
+import { useRef, useState, useEffect, Dispatch } from 'react';
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react';
 import Cookies from "js-cookie";
@@ -11,6 +11,8 @@ type LikeStatusType = {
 
 type Props = {
     postId: bigint,
+    // likeStatus: LikeStatusType
+    // setLikeStatus: Dispatch<SetStateAction<LikeStatusType>>
     // handleLike: (id: bigint) => void
 }
 
@@ -36,24 +38,23 @@ const Like = ({ postId }: Props) => {
             })
     });
 
-
     const getLikeStatus = async (postId: bigint) => {
-      const strId = String(postId)
-        const response = await fetch('/api/like-status', {
-        headers: {
-          authorization: `Bearer ${Cookies.get('token')}`,
-          post_id: strId
-        }
-        })
-        const likeData = await response.json()
-        setLikeStatus(likeData)
-
-        if (likeData.isLikedByUser) {
-            colorLike('#ff0000', 0.5)
-        } else {
-            colorLike('#000000', 1)
-        }
-    }
+        const strId = String(postId)
+          const response = await fetch('/api/like-status', {
+          headers: {
+            authorization: `Bearer ${Cookies.get('token')}`,
+            post_id: strId
+          }
+          })
+          const likeData = await response.json()
+          setLikeStatus(likeData)
+  
+          if (likeData.isLikedByUser) {
+              colorLike('#ff0000', 0.5)
+          } else {
+              colorLike('#000000', 1)
+          }
+      }
 
     const likePost = async (postId: bigint) => {
         const response = await fetch('/api/like', {
@@ -81,24 +82,27 @@ const Like = ({ postId }: Props) => {
                 'post_id': postId
             })
         })
+        console.log(response)
+
         if (!response.ok) {
             throw new Error("an error occured while unliking post");
         }
     }
 
     const handleLikeColor = () => {
-        console.log(likeStatus.postIsLike)
+        setLikeStatus(prev => ({
+            postIsLike: !prev.postIsLike, 
+            likeCount: prev.postIsLike ? prev.likeCount - 1 : prev.likeCount + 1
+        }))
         if (!likeStatus.postIsLike) {
             colorLike('#ff0000', 0.5) 
-            setLikeStatus({postIsLike: true, likeCount: likeStatus.likeCount +1})
         } else {
             colorLike('#000000', 1)
-            setLikeStatus({postIsLike: false, likeCount: likeStatus.likeCount -1})
         }
     }
 
     const handleLike = async () => {
-        if (likeStatus.postIsLike) {
+        if (!likeStatus.postIsLike) {
             await likePost(postId)
         } else {
             await unlikePost(postId)
@@ -106,13 +110,9 @@ const Like = ({ postId }: Props) => {
         handleLikeColor()
     }
 
-    // console.log(likeStatus)
-
     useEffect(() => {
         getLikeStatus(postId)
     }, [])
-
-
 
     return (
         <div className="flex items-center justify-center" ref={container} >

@@ -4,6 +4,7 @@ import { posts } from "@prisma/client";
 import { useEffect, useState } from "react";
 import PostCard from "./PostCard";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { MutatingDots } from "react-loader-spinner";
 
 
 interface PostType extends posts {
@@ -72,7 +73,18 @@ export default function Home() {
           next={fetchNextData}
           hasMore={hasMore}
           className={'flex flex-col gap-3 w-full '}
-          loader={<h4 className="w-full h-full text-center">Loading...</h4>
+          loader={
+          <MutatingDots 
+            visible={true}
+            height="100"
+            width="100"
+            color="rgb(178, 255, 216)"
+            secondaryColor="rgb(255, 133, 128)"
+            radius="20"
+            ariaLabel="mutating-dots-loading"
+            wrapperStyle={{}}
+            wrapperClass="w-full flex justify-center"
+            />
           }
         >
         {postData.map((post: PostType, index) => (

@@ -34,7 +34,6 @@ export default function RootLayout({
 
   const container = useRef<HTMLBodyElement | null>(null)
   const pathname = usePathname()
-  // console.log(pathname)
   const { contextSafe } = useGSAP()
   
   const animateGradient = contextSafe(
@@ -42,14 +41,15 @@ export default function RootLayout({
         newStyle: string,
       ) => {
         gsap.to(container.current, {
-          duration: 2,
+          duration: 2.5,
+          ease: "back.inOut",
           backgroundAttachment: "fixed",
           background: newStyle,
         })
       }
   )
 
-  const backgroundStyle = `
+  const loginBackgroundStyle = `
     radial-gradient(circle at 20% 30%, #d7eaff, transparent 60%),
     radial-gradient(circle at 70% 40%, #ff8580, transparent 50%),
     radial-gradient(circle at 40% 70%, #9ba0ff, transparent 70%),
@@ -59,35 +59,43 @@ export default function RootLayout({
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0)
     ),
+    linear-gradient(95deg, #e1f4ff, #ff7741)`
+
+  const registerBackgroundStyle = `
+    radial-gradient(circle at 90% 70%, #d7eaff, transparent 50%),
+    radial-gradient(circle at 20% 90%, #ff8580, transparent 70%),
+    radial-gradient(circle at 95% 15%, #9ba0ff, transparent 50%),
+    radial-gradient(circle at 20% 35%, #b2ffd8, transparent 50%),
+    linear-gradient(to bottom right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)),
     linear-gradient(135deg, #e1f4ff, #ff7741)`
 
-    const newBackgroundStyle = `
-      radial-gradient(circle at 80% 70%, #d7eaff, transparent 20%),
-      radial-gradient(circle at 20% 90%, #ff8580, transparent 70%),
-      radial-gradient(circle at 65% 25%, #9ba0ff, transparent 20%),
-      radial-gradient(circle at 20% 45%, #b2ffd8, transparent 50%),
-      linear-gradient(to bottom right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)),
-      linear-gradient(135deg, #e1f4ff, #ff7741)`
+  const mainBackgroundStyle = `
+    radial-gradient(circle at 10% 20%, #fbcaca, transparent 70%),
+    radial-gradient(circle at 70% 25%, #b2ffd8, transparent 70%),
+    radial-gradient(circle at 20% 80%, #ff8580, transparent 55%),
+    radial-gradient(circle at 85% 70%, #9ba0ff, transparent 70%),
+    linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0)
+    ),
+    linear-gradient(144deg, #b2ffd8, #e1f4ff)`
 
 
-    useEffect(() => {
-      console.log(container.current)
-      if (pathname === "/auth/register") {
-        // animateGradient(newBackgroundStyle)
-        animateGradient(newBackgroundStyle)
-      }
-    
-      if (pathname === "/auth/login") {
-        // animateGradient(backgroundStyle)
-        animateGradient(backgroundStyle)
-      }
+  useEffect(() => {
+    if (pathname === "/auth/register") {
+      animateGradient(registerBackgroundStyle)
+    }
+  
+    if (pathname === "/auth/login") {
+      animateGradient(loginBackgroundStyle)
+    }
 
-      if (pathname === "/main") {
-        // animateGradient(backgroundStyle)
-        animateGradient(backgroundStyle)
-      }
+    if (pathname === "/main") {
+      animateGradient(mainBackgroundStyle)
+    }
 
-    })
+  })
 
 
   return (
@@ -96,9 +104,7 @@ export default function RootLayout({
         className={`${inter.variable} ${quickSand.variable} container h-svh antialiased`}
         ref={container}
       >
-        {/* <div className="main-div" > */}
-          {children}
-        {/* </div> */}
+        {children}
       </body>
     </html>
   );

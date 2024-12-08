@@ -8,7 +8,7 @@ export default function MainLayout({
       <h3 className="header font-quicksand font-bold text-3xl p-3 text-right">
         weett
       </h3>
-      <div className="main-container">{children}</div>
+      <div className="main-container no-scrollbar">{children}</div>
     </div>
   );
 }

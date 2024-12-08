@@ -71,7 +71,7 @@ export default function Home() {
           dataLength={postData.length}
           next={fetchNextData}
           hasMore={hasMore}
-          className={'flex flex-col gap-3 w-full'}
+          className={'flex flex-col gap-3 w-full '}
           loader={<h4 className="w-full h-full text-center">Loading...</h4>
           }
         >

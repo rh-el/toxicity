@@ -35,6 +35,16 @@ body {
   align-items: center;
 }
 
+.comment-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .card-auth {
   padding: 2rem 1.5rem 2rem 1.5rem;
   gap: 1.25rem;

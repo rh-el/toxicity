@@ -1,10 +1,8 @@
 "use client";
 
-import PostCard from "../../PostCard";
+import PostCard from "./PostCard";
 import { useState, useEffect, use } from "react";
 import { useParams } from "next/navigation";
-import CommentFeed from "../../CommentFeed/page";
-import FocusedPost from "../../FocusedPost";
 
 interface PostType {
   id: bigint;
@@ -16,11 +14,20 @@ interface PostType {
   };
 }
 
-export default function PostFocus({ params }: { params: { id: string } }) {
+interface PostFocus {
+  id: bigint;
+  setFocusMode: any;
+  setFocusedPost: any;
+}
+
+export default function PostFocus({
+  id,
+  setFocusMode,
+  setFocusedPost,
+}: PostFocus) {
   const [focusInfo, setFocusInfo] = useState<PostType>();
 
-  const urlParams = useParams<{ id: string }>();
-  const post_id = urlParams.id;
+  const post_id = JSON.stringify(id);
 
   const getPostInfo = async () => {
     const response = await fetch("/api/post", {
@@ -54,13 +61,14 @@ export default function PostFocus({ params }: { params: { id: string } }) {
   }
 
   return (
-    <>
+    <div className="background-blur">
       {post && (
-        <div className="flex flex-col gap-3">
-          <FocusedPost post={post} />
-          <CommentFeed postId={post_id} />
-        </div>
+        <PostCard
+          post={post}
+          setFocusMode={setFocusMode}
+          setFocusedPost={setFocusedPost}
+        />
       )}
-    </>
+    </div>
   );
 }

@@ -22,7 +22,13 @@ export async function GET(req:NextRequest) {
         prisma.users.findUnique({
             where: {
                 id: userId
-            },            
+            },
+            select: {
+                id: true,
+                username: true,
+                avatar: true,
+                bio: true
+            }
         }),
         prisma.followers.count({
             where: {

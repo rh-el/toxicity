@@ -32,7 +32,9 @@ export async function GET(req: Request) {
                     avatar: true
                 }
             }
-
+        },
+        orderBy: {
+            id: 'desc'
         }
         })
             return NextResponse.json(commentFeed);

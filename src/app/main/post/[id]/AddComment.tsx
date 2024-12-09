@@ -2,11 +2,7 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import Image from "next/image";
-import { posts } from "@prisma/client";
-import Like from "./Like";
 import Cookies from "js-cookie";
-import CommentButton from "./CommentButton";
-import { Button } from "@/components/ui/button";
 import { useRef } from "react";
 
 const imageLoader = (src: string, width?: number, quality?: number) => {
@@ -31,7 +27,7 @@ const AddComment = ({ postId, setReloads }: Props) => {
 
   const getCommenterInfo = async () => {
     try {
-      const response = await fetch(`/api/profile`, {
+      const response = await fetch(`/api/profile/0`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${Cookies.get("token")}`,

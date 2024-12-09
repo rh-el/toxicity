@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import PostCard from "../PostCard";
-import CommentCard from "../CommentCard";
+import CommentCard from "./CommentCard";
 
 interface PostType {
   id: bigint;

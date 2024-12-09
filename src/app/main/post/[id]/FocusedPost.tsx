@@ -1,9 +1,6 @@
-import { useEffect, useState } from "react";
 import Image from "next/image";
-import { posts } from "@prisma/client";
-import Like from "./Like";
-import Cookies from "js-cookie";
-import CommentButton from "./CommentButton";
+import Like from "../../Like";
+import CommentButton from "../../CommentButton";
 
 const imageLoader = (src: string, width?: number, quality?: number) => {
   return `${src}?w=${width}&q=${quality}`;

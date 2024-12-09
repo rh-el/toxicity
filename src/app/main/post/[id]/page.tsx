@@ -1,11 +1,10 @@
 "use client";
 
-import PostCard from "../../PostCard";
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-import CommentFeed from "../../CommentFeed/page";
-import FocusedPost from "../../FocusedPost";
-import AddComment from "../../AddComment";
+import CommentFeed from "./CommentFeed";
+import FocusedPost from "./FocusedPost";
+import AddComment from "./AddComment";
 
 interface PostType {
   id: bigint;

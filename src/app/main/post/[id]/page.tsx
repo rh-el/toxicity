@@ -5,6 +5,7 @@ import { useState, useEffect, use } from "react";
 import { useParams } from "next/navigation";
 import CommentFeed from "../../CommentFeed/page";
 import FocusedPost from "../../FocusedPost";
+import AddComment from "../../AddComment";
 
 interface PostType {
   id: bigint;
@@ -58,6 +59,7 @@ export default function PostFocus({ params }: { params: { id: string } }) {
       {post && (
         <div className="flex flex-col gap-3">
           <FocusedPost post={post} />
+          <AddComment user={} />
           <CommentFeed postId={post_id} />
         </div>
       )}

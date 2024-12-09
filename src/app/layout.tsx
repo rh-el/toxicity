@@ -91,7 +91,7 @@ export default function RootLayout({
       animateGradient(loginBackgroundStyle)
     }
 
-    if (pathname === "/main") {
+    if (pathname.startsWith("/main")) {
       animateGradient(mainBackgroundStyle)
     }
 

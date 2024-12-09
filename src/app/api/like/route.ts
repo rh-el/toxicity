@@ -13,7 +13,6 @@ export async function POST(req: Request) {
             },
         })
         const userId = await userIdFetch.json()
-        console.log(userId.tokenCheck)
 
         const like = await prisma.likes.create({
             data: {

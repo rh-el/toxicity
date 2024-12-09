@@ -69,7 +69,6 @@ const Like = ({ postId }: Props) => {
                 'post_id': postId
             })
         })
-        console.log(response)
         if (!response.ok) {
             throw new Error("an error occured while liking post");
         }
@@ -85,7 +84,6 @@ const Like = ({ postId }: Props) => {
                 'post_id': postId
             })
         })
-        console.log(response)
 
         if (!response.ok) {
             throw new Error("an error occured while unliking post");
@@ -107,7 +105,6 @@ const Like = ({ postId }: Props) => {
     }
 
     const handleLike = async () => {
-        console.log(likeStatus.postIsLike)
         if (!likeStatus.postIsLike) {
             await likePost(postId)
         } else {

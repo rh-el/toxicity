@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import { useRef } from "react";
+import { useRouter } from "next/navigation";
 
 const imageLoader = (src: string, width?: number, quality?: number) => {
   return `${src}?w=${width}&q=${quality}`;
@@ -16,16 +17,12 @@ interface userType {
   bio: string;
 }
 
-interface Props {
-  postId: bigint;
-  setReloads: any;
-}
-
-const AddComment = ({ postId, setReloads }: Props) => {
+const AddPost = () => {
+  const router = useRouter();
   const inputField = useRef<any>();
   const [userData, setUserData] = useState<userType>();
 
-  const getCommenterInfo = async () => {
+  const getUserInfo = async () => {
     try {
       const response = await fetch(`/api/profile/0`, {
         method: "GET",
@@ -45,7 +42,7 @@ const AddComment = ({ postId, setReloads }: Props) => {
   };
 
   useEffect(() => {
-    getCommenterInfo();
+    getUserInfo();
   }, []);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -54,12 +51,13 @@ const AddComment = ({ postId, setReloads }: Props) => {
     try {
       const formData = new FormData(event.currentTarget);
       const content = String(formData.get("content"));
-      const response = await fetch("/api/add-comment", {
+      const response = await fetch("/api/add-post", {
         method: "POST",
+        headers: {
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
         body: JSON.stringify({
           content: content,
-          userId: userData!.id,
-          postId: postId,
         }),
       });
       if (!response.ok) {
@@ -68,7 +66,7 @@ const AddComment = ({ postId, setReloads }: Props) => {
       const data = await response.json();
       console.log(data);
       inputField.current.value = "";
-      setReloads((prev: number) => prev + 1);
+      router.push("/main");
     } catch (error) {
       console.error(error);
       return error;
@@ -104,7 +102,7 @@ const AddComment = ({ postId, setReloads }: Props) => {
               ref={inputField}
               rows={2}
               name="content"
-              placeholder="Enter your comment"
+              placeholder="What's up?"
               className="bg-white/30 flex-1 overflow-y-auto outline-none border-none font-light p-2 text-sm focus:ring-transparent focus:border focus:border-white placeholder-gray-400 rounded-t-md"
             />
             <button
@@ -120,4 +118,4 @@ const AddComment = ({ postId, setReloads }: Props) => {
   );
 };
 
-export default AddComment;
+export default AddPost;

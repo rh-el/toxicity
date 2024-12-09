@@ -9,8 +9,14 @@ const imageLoader = (src: string, width?: number, quality?: number) => {
   return `${src}?w=${width}&q=${quality}`;
 };
 
-interface PostType extends posts {
-  users: { id: bigint; username: string; avatar: string };
+interface PostType {
+  id: bigint;
+  content: string;
+  users: {
+    id: bigint;
+    username: string;
+    avatar: string;
+  };
 }
 
 type Props = {
@@ -44,6 +50,5 @@ const PostCard = ( {post}: Props) => {
     
 
 }
-
 
 export default PostCard

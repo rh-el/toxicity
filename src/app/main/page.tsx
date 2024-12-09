@@ -1,14 +1,18 @@
 "use client";
 
-import { posts } from "@prisma/client";
 import { useEffect, useState } from "react";
 import PostCard from "./PostCard";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { MutatingDots } from "react-loader-spinner";
 
-
-interface PostType extends posts {
-  users: { id: bigint; username: string; avatar: string };
+interface PostType {
+  id: bigint;
+  content: string;
+  users: {
+    id: bigint;
+    username: string;
+    avatar: string;
+  };
 }
 
 export default function Home() {
@@ -64,7 +68,6 @@ export default function Home() {
     fetchFirstPosts()
   }, []);
 
-  
   return (
     <>
       <div className="flex flex-col gap-3 w-full">

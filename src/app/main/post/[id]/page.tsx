@@ -59,7 +59,7 @@ export default function PostFocus({ params }: { params: { id: string } }) {
       {post && (
         <div className="flex flex-col gap-3">
           <FocusedPost post={post} />
-          <AddComment user={} />
+          {/* <AddComment user={} /> */}
           <CommentFeed postId={post_id} />
         </div>
       )}

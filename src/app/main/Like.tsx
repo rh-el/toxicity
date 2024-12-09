@@ -10,7 +10,7 @@ type LikeStatusType = {
   }
 
 type Props = {
-    postId: bigint,
+    postId: bigint | number,
     // likeStatus: LikeStatusType
     // setLikeStatus: Dispatch<SetStateAction<LikeStatusType>>
     // handleLike: (id: bigint) => void

@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { posts } from "@prisma/client";
-import Like from "./Like";
+import Like from "../../Like";
 import Cookies from "js-cookie";
-import CommentButton from "./CommentButton";
+import CommentButton from "../../CommentButton";
 
 const imageLoader = (src: string, width?: number, quality?: number) => {
   return `${src}?w=${width}&q=${quality}`;
@@ -25,23 +24,28 @@ interface PostType {
 
 type Props = {
     post: PostType 
+    profileData: {
+      username: string;
+      avatar: string;
+      bio: string;
+    } | undefined
 }
 
-const PostCard = ( {post}: Props) => {
+const ProfilePostCard = ( {post, profileData}: Props) => {
 
     return (
         <div className="card card-post">
             <Image
-              loader={() => imageLoader(post.users!.avatar)}
+              loader={() => imageLoader(profileData!.avatar)}
               height={50}
               width={50}
-              src={post.users!.avatar}
+              src={profileData!.avatar}
               alt=""
               priority
               className="rounded-full"
             ></Image>
             <div className="flex flex-col gap-2">
-              <h1 className="font-semibold pt-2">{post.users?.username}</h1>
+              <h1 className="font-semibold pt-2">{profileData?.username}</h1>
               {post.content} Lorem ipsum dolor sit amet consectetur adipisicing
               elit. Nam nulla consequatur, earum nostrum corrupti nesciunt
               <div className="flex gap-2 py-2">
@@ -55,4 +59,4 @@ const PostCard = ( {post}: Props) => {
 
 }
 
-export default PostCard
+export default ProfilePostCard

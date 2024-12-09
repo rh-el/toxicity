@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 interface CommentButton {
-  id: bigint;
+  id: bigint | number;
 }
 
 const CommentButton = ({ id }: CommentButton) => {

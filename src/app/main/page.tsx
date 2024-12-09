@@ -68,6 +68,7 @@ export default function Home() {
     fetchFirstPosts()
   }, []);
 
+  console.log(postData)
   return (
     <>
       <div className="flex flex-col gap-3 w-full">

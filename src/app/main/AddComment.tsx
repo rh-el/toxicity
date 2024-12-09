@@ -6,6 +6,7 @@ import { posts } from "@prisma/client";
 import Like from "./Like";
 import Cookies from "js-cookie";
 import CommentButton from "./CommentButton";
+import { Button } from "@/components/ui/button";
 
 const imageLoader = (src: string, width?: number, quality?: number) => {
   return `${src}?w=${width}&q=${quality}`;
@@ -44,26 +45,40 @@ const AddComment = () => {
   }, []);
 
   return (
-    <div className=" card-post">
+    <div className="card-post">
       <div className="flex gap-3 w-full">
         <div className="w-16">
-          <Image
-            loader={() => imageLoader(userData.avatar)}
-            height={50}
-            width={50}
-            src={userData.avatar}
-            alt=""
-            priority
-            className="rounded-full"
-          ></Image>
+          {userData && (
+            <Image
+              loader={() => imageLoader(userData.avatar)}
+              height={50}
+              width={50}
+              src={
+                userData.avatar
+                  ? userData.avatar
+                  : "https://jwyjrgwkkaqapgjqjlbb.supabase.co/storage/v1/object/sign/avatars/avatar.webp?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhdmF0YXJzL2F2YXRhci53ZWJwIiwiaWF0IjoxNzMzMzk2Njk5LCJleHAiOjE3NjQ5MzI2OTl9.s_WGrL3Ej4z9-UW5dDkUHwZgAC6fpFdqVWXOpJhYaq0&t=2024-12-05T11%3A04%3A59.556Z"
+              }
+              alt=""
+              priority
+              className="rounded-full"
+            ></Image>
+          )}
         </div>
         <div className="flex flex-col gap-2 pb-3 w-full">
           <h1 className="font-semibold pt-2">{userData.username}</h1>
-          <input
-            type="text-area"
-            placeholder="Enter your comment"
-            className="bg-white/30 h-8 font-light p-1 text-sm text-start focus:ring-transparent focus:border focus:border-white placeholder-gray-400 rounded-sm"
-          />
+          <form className="flex flex-col">
+            <textarea
+              rows={2}
+              placeholder="Enter your comment"
+              className="bg-white/30 flex-1 overflow-y-auto outline-none border-none font-light p-2 text-sm focus:ring-transparent focus:border focus:border-white placeholder-gray-400 rounded-t-md"
+            />
+            <button
+              type="submit"
+              className="bg-white/30 text-gray-800 font-semibold flex items-end h-6 justify-end px-2 py-1 w-full rounded-b-md"
+            >
+              Send
+            </button>
+          </form>
         </div>
       </div>
     </div>

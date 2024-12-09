@@ -1,25 +1,33 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import { posts } from "@prisma/client";
 import Like from "./Like";
 import Cookies from "js-cookie";
 import CommentButton from "./CommentButton";
 import { Button } from "@/components/ui/button";
+import { useRef } from "react";
 
 const imageLoader = (src: string, width?: number, quality?: number) => {
   return `${src}?w=${width}&q=${quality}`;
 };
 
 interface userType {
+  id: bigint;
   username: string;
   avatar: string;
   bio: string;
 }
 
-const AddComment = () => {
-  const [userData, setUserData] = useState<userType>([]);
+interface Props {
+  postId: bigint;
+  setReloads: any;
+}
+
+const AddComment = ({ postId, setReloads }: Props) => {
+  const inputField = useRef<any>();
+  const [userData, setUserData] = useState<userType>();
 
   const getCommenterInfo = async () => {
     try {
@@ -44,6 +52,33 @@ const AddComment = () => {
     getCommenterInfo();
   }, []);
 
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      const formData = new FormData(event.currentTarget);
+      const content = String(formData.get("content"));
+      const response = await fetch("/api/comment", {
+        method: "POST",
+        body: JSON.stringify({
+          content: content,
+          userId: userData!.id,
+          postId: postId,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error("Registration error");
+      }
+      const data = await response.json();
+      console.log(data);
+      inputField.current.value = "";
+      setReloads((prev: number) => prev + 1);
+    } catch (error) {
+      console.error(error);
+      return error;
+    }
+  };
+
   return (
     <div className="card-post">
       <div className="flex gap-3 w-full">
@@ -65,10 +100,14 @@ const AddComment = () => {
           )}
         </div>
         <div className="flex flex-col gap-2 pb-3 w-full">
-          <h1 className="font-semibold pt-2">{userData.username}</h1>
-          <form className="flex flex-col">
+          <h1 className="font-semibold pt-2">
+            {userData?.username && userData!.username}
+          </h1>
+          <form onSubmit={handleSubmit} className="flex flex-col">
             <textarea
+              ref={inputField}
               rows={2}
+              name="content"
               placeholder="Enter your comment"
               className="bg-white/30 flex-1 overflow-y-auto outline-none border-none font-light p-2 text-sm focus:ring-transparent focus:border focus:border-white placeholder-gray-400 rounded-t-md"
             />

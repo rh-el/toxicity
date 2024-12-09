@@ -19,6 +19,7 @@ interface PostType {
 
 export default function PostFocus({ params }: { params: { id: string } }) {
   const [focusInfo, setFocusInfo] = useState<PostType>();
+  const [reloads, setReloads] = useState<number>(0);
 
   const urlParams = useParams<{ id: string }>();
   const post_id = urlParams.id;
@@ -59,8 +60,8 @@ export default function PostFocus({ params }: { params: { id: string } }) {
       {post && (
         <div className="flex flex-col gap-5">
           <FocusedPost post={post} />
-          <AddComment />
-          <CommentFeed postId={post_id} />
+          <AddComment postId={focusInfo!.id!} setReloads={setReloads} />
+          <CommentFeed postId={post_id} key={reloads} />
         </div>
       )}
     </>

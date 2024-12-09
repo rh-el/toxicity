@@ -20,6 +20,7 @@ export async function GET(req:Request) {
                 id: userId
             },
             select: {
+                id: true,
                 username: true,
                 avatar: true,
                 bio: true

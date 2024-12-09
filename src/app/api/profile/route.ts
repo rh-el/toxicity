@@ -14,7 +14,7 @@ export async function GET(req:Request) {
         throw new Error('error while trying to verify token')
     }
 
-    const profileData = await prisma.$transaction([
+    const [profileData, followerCount] = await prisma.$transaction([
         prisma.users.findUnique({
             where: {
                 id: userId
@@ -32,7 +32,7 @@ export async function GET(req:Request) {
         })
     ])
 
-    return NextResponse.json(profileData);
+    return NextResponse.json({profileData, followerCount});
     
 
     } catch (error) {

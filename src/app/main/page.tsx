@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import PostCard from "./PostCard";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { MutatingDots } from "react-loader-spinner";
+import { Heading4 } from "lucide-react";
 
 interface PostType {
   id: bigint;
@@ -21,11 +22,12 @@ export default function Home() {
   const [hasMore, setHasMore] = useState<boolean>(true);
 
   const fetchNextData = async () => {
+
     try {
 
       const idToFetch = lastFetchedId -1
       const response = await fetch(`/api/next-post/${idToFetch}`)
-      console.log('inside fetch next data')
+      console.log('inside fetch next data') 
       if (!response.ok) {
 
         throw new Error("Error while fetching next post");
@@ -39,12 +41,13 @@ export default function Home() {
     } catch (error) {
       console.error(error)
       // setHasMore(false)
-    }
+    } 
   }
 
 
   const fetchFirstPosts = async () => {
     try {
+      console.log('INSIDE FETCH FIRST POSTS')
 
       const response = await fetch(`/api/next-post/0`)
 
@@ -91,7 +94,7 @@ export default function Home() {
           }
         >
         {postData.map((post: PostType, index) => (
-          <PostCard key={post.id.toString()} post={post} />
+          <PostCard key={index} post={post} />
         ))}
         </InfiniteScroll>
       </div>

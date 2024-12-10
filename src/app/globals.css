@@ -5,8 +5,9 @@
 body {
   font-family: "Inter";
   width: 100vw;
-  height: 100vh;
+  /* min-height: 100vh; */
   box-sizing: border-box;
+
   /* background-attachment: fixed */
 }
 
@@ -30,7 +31,8 @@ body {
 
 .main-container {
   padding: 1rem 1rem 1rem 1rem;
-  overflow: scroll;
+  /* overflow: scroll; */
+  min-height: 100svh;
   width: 100%;
 }
 
@@ -87,4 +89,10 @@ body {
 }
 .no-scrollbar::-webkit-scrollbar { 
   display: none;  /* Safari and Chrome */
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
 }

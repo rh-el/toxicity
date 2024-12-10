@@ -1,14 +1,7 @@
-import { useEffect, useState } from "react";
 import Image from "next/image";
-import { posts } from "@prisma/client";
 import Like from "./Like";
-import Cookies from "js-cookie";
 import CommentButton from "./CommentButton";
 import Link from "next/link";
-
-const imageLoader = (src: string, width?: number, quality?: number) => {
-  return `${src}?w=${width}&q=${quality}`;
-};
 
 interface PostType {
   id: bigint | number;
@@ -32,19 +25,20 @@ const PostCard = ( {post}: Props) => {
 
   const dynamicProfilePath = `main/profile/${post.users?.id}`
 
-  console.log('LOG POST IN POSTCARD', post)
 
     return (
         <div className="card card-post">
+          <div className="relative w-20 h-20  ">
             <Image
-              loader={() => imageLoader(post?.users!.avatar)}
               height={50}
               width={50}
               src={post?.users!.avatar}
-              alt=""
+              alt="an avatar of a user"
               priority
-              className="rounded-full"
+              className="avatar rounded-full"
+              unoptimized
             ></Image>
+          </div>
             <div className="flex flex-col gap-2">
               <Link href={dynamicProfilePath}>
                 <h1 className="font-semibold pt-2">{post?.users?.username}</h1>

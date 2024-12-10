@@ -27,7 +27,7 @@ const getLastPostInfos = async () => {
         orderBy: {
             id: 'desc'
         },
-        take: 5
+        take: 8
     })
     return lastPostQuery
 }

@@ -101,7 +101,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${quickSand.variable} container h-svh antialiased`}
+        className={`${inter.variable} ${quickSand.variable} container antialiased`}
         ref={container}
       >
         {children}

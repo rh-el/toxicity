@@ -6,6 +6,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { useParams } from "next/navigation"
 import ProfilePostCard from "./ProfilePostCard"
+import { profile } from "console"
 
 type ProfileDataType = {
     username: string;
@@ -16,6 +17,7 @@ type ProfileDataType = {
 type FullProfileDataType = {
     profileData: ProfileDataType;
     followerCount: number;
+    isFollowed: boolean
 }
 
 type PostTypeProfile = {
@@ -43,8 +45,6 @@ export default function Profile () {
     const [ profileData, setProfileData ] = useState<FullProfileDataType | null>(null)
     const [ userPosts, setUserPosts ] = useState<UserPostsType>({ userPosts: [] })
 
-    console.log(userPosts)
-    console.log(profileData)
     const urlParams = useParams<{ id: string }>();
     const profile_id = urlParams.id;
 
@@ -66,7 +66,35 @@ export default function Profile () {
         })
         const userPosts = await response.json()
         setUserPosts(userPosts)
-        console.log(userPosts)
+    }
+
+    const handleFollow = async () => {
+        try {
+
+            if (profileData?.isFollowed) {
+                await fetch(`/api/unfollow/${profile_id}`, {
+                    method: "POST",
+                    headers: {
+                        authorization: `Bearer ${Cookies.get('token')}`
+                    }
+                })
+                setProfileData(prev => ({...prev as FullProfileDataType, isFollowed : false}))
+                return
+            } 
+
+            if (profileData?.isFollowed == false) {
+                await fetch(`/api/follow/${profile_id}`, {
+                    method: "POST",
+                    headers: {
+                        authorization: `Bearer ${Cookies.get('token')}`
+                    }
+                }) 
+                setProfileData(prev => ({...prev as FullProfileDataType, isFollowed : true}))
+                return
+            }
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     useEffect(() => {
@@ -84,8 +112,8 @@ export default function Profile () {
                     <h2 className="font-quicksand font-bold text-3xl text-right">{profileData.profileData.username}</h2>
                     <Image
                         loader={() => imageLoader(profileData.profileData.avatar)}
-                        height={50}
-                        width={50}
+                        height={80}
+                        width={80}
                         src={profileData.profileData.avatar}
                         alt=""
                         priority
@@ -94,7 +122,7 @@ export default function Profile () {
                 </div>
                 <h3 className="font-bold">{profileData.profileData.bio}</h3>
                 <h4 className="text-gray-600">{profileData.followerCount} {profileData.followerCount > 1 ? "followers" : "follower"}</h4>
-                <Button className="bg-black text-white text-md">Follow</Button>
+                <Button onClick={handleFollow} className="bg-black text-white text-md">{profileData.isFollowed ? "Unfollow" : "Follow"}</Button>
             </div>
         }
         <div className="flex flex-col gap-3 w-full">

@@ -25,7 +25,7 @@ export default function Home() {
 
       const idToFetch = lastFetchedId -1
       const response = await fetch(`/api/next-post/${idToFetch}`)
-
+      console.log('inside fetch next data')
       if (!response.ok) {
 
         throw new Error("Error while fetching next post");
@@ -67,8 +67,7 @@ export default function Home() {
   useEffect(() => {
     fetchFirstPosts()
   }, []);
-
-  console.log(postData)
+  
   return (
     <>
       <div className="flex flex-col gap-3 w-full">
@@ -92,7 +91,7 @@ export default function Home() {
           }
         >
         {postData.map((post: PostType, index) => (
-          <PostCard key={index} post={post} />
+          <PostCard key={post.id.toString()} post={post} />
         ))}
         </InfiniteScroll>
       </div>

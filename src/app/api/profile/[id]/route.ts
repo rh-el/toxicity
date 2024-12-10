@@ -8,36 +8,43 @@ export async function GET(req:NextRequest) {
     try {
 
         const paramId = Number(req.nextUrl.pathname.split('/').pop())
-    // const token  = req.headers.get('authorization')?.split(' ')[1]    
-    // const userId = Number(verifyToken(token))
+        const userId = paramId === 0 ? Number(verifyToken(req.headers.get('authorization')?.split(' ')[1])) : paramId
 
-    const userId = paramId === 0 ? Number(verifyToken(req.headers.get('authorization')?.split(' ')[1])) : paramId
-    console.log(userId)
+        if (!userId) {
+            throw new Error('error while trying to verify token')
+        }
 
-    if (!userId) {
-        throw new Error('error while trying to verify token')
-    }
+        const [profileData, followerCount, followedId] = await prisma.$transaction([
+            prisma.users.findUnique({
+                where: {
+                    id: userId
+                },
+                select: {
+                    id: true,
+                    username: true,
+                    avatar: true,
+                    bio: true
+                }
+            }),
+            prisma.followers.count({
+                where: {
+                    followed_id: userId
+                }
+            }),
+            prisma.followers.findFirst({
+                where: {
+                    followed_id: paramId,
+                    following_id: Number(verifyToken(req.headers.get('authorization')?.split(' ')[1]))
+                },
+                select: {
+                    id: true
+                }
+            })
+        ])
 
-    const [profileData, followerCount] = await prisma.$transaction([
-        prisma.users.findUnique({
-            where: {
-                id: userId
-            },
-            select: {
-                id: true,
-                username: true,
-                avatar: true,
-                bio: true
-            }
-        }),
-        prisma.followers.count({
-            where: {
-                followed_id: userId
-            }
-        })
-    ])
+        const isFollowed = followedId ? true : false
 
-    return NextResponse.json({profileData, followerCount});
+        return NextResponse.json({profileData, followerCount, isFollowed});
     
 
     } catch (error) {

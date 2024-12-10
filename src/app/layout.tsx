@@ -80,6 +80,42 @@ export default function RootLayout({
       rgba(255, 255, 255, 0)
     ),
     linear-gradient(144deg, #b2ffd8, #e1f4ff)`
+  
+  const addPostBackgroundStyle = `
+    radial-gradient(circle at 90% 90%, #75e8d6, transparent 40%),
+    radial-gradient(circle at 70% 65%, #ffffff, transparent 40%),
+    radial-gradient(circle at 20% 80%, #e9a9a9, transparent 70%),
+    radial-gradient(circle at 25% 30%, #ff9b9b, transparent 70%),
+    linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0)
+    ),
+    linear-gradient(232deg, #6ffdf6ab, #ffac00)`
+  
+  const searchBackgroundStyle = `
+    radial-gradient(circle at 10% 10%, #75e8d6, transparent 60%),
+    radial-gradient(circle at 30% 85%, #ffffff, transparent 30%),
+    radial-gradient(circle at 80% 10%, #f4a2a2, transparent 60%),
+    radial-gradient(circle at 25% 30%, #ff9b9b, transparent 90%),
+    linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0)
+    ),
+    linear-gradient(0deg, #bfabf7, #ffac00)`
+
+  const profileBackgroundStyle = `
+    radial-gradient(circle at 45% 90%, #75e8d6, transparent 80%),
+    radial-gradient(circle at 80% 85%, #ffffff, transparent 90%),
+    radial-gradient(circle at 80% 10%, #f4a2a2, transparent 60%),
+    radial-gradient(circle at 25% 30%, #ff9b9b, transparent 90%),
+    linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0)
+    ),
+    linear-gradient(0deg, #f79696, #ffac00)`
 
 
   useEffect(() => {
@@ -91,8 +127,20 @@ export default function RootLayout({
       animateGradient(loginBackgroundStyle)
     }
 
-    if (pathname.startsWith("/main")) {
+    if (pathname === "/main") {
       animateGradient(mainBackgroundStyle)
+    }
+
+    if (pathname === "/main/add-post") {
+      animateGradient(addPostBackgroundStyle)
+    }
+
+    if (pathname === "/main/search") {
+      animateGradient(searchBackgroundStyle)
+    }
+
+    if (pathname.startsWith("/main/profile")) {
+      animateGradient(profileBackgroundStyle)
     }
 
   })

@@ -29,12 +29,9 @@ export async function GET(req:NextRequest) {
                 }
         })
 
-        console.log(matchedPosts)
-
-
         // const isFollowed = followedId ? true : false
 
-        return NextResponse.json({});
+        return NextResponse.json({matchedPosts});
     
 
     } catch (error) {

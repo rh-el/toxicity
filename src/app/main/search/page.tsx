@@ -47,6 +47,7 @@ const AddPost = () => {
           #
         </div>
         <input
+          ref={inputField}
           name="tag"
           placeholder="Enter tag name"
           className="bg-white/30 w-full outline-none border-none font-light p-2 text-sm focus:ring-transparent focus:border focus:border-white placeholder-gray-400"

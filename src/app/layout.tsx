@@ -104,7 +104,7 @@ export default function RootLayout({
         className={`${inter.variable} ${quickSand.variable} container antialiased`}
         ref={container}
       >
-        {children}
+          {children}
       </body>
     </html>
   );

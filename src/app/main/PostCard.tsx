@@ -3,6 +3,7 @@ import Like from "./Like";
 import CommentButton from "./CommentButton";
 import Link from "next/link";
 
+
 interface PostType {
   id: bigint | number;
   content: string;
@@ -28,12 +29,12 @@ const PostCard = ( {post}: Props) => {
 
     return (
         <div className="card card-post">
-          <div className="relative w-20 h-20  ">
+          <div className="relative min-w-12 min-h-12">
             <Image
               height={50}
               width={50}
               src={post?.users!.avatar}
-              alt="an avatar of a user"
+              alt=""
               priority
               className="avatar rounded-full"
               unoptimized

@@ -64,10 +64,10 @@ export default function Login() {
 
   return (
     
-      <form onSubmit={handleSubmit} className="card card-auth">
+      <form onSubmit={handleSubmit} className="card card-auth h-full">
         <h2 className="font-semibold">Login</h2>
         <div className="flex flex-col gap-2  w-full px-4">
-          <h3 className="text-sm pl-1">Email</h3>
+          <h3 className="text-sm pl-1 font-semibold">Email</h3>
           <Input
             type="text"
             name="email"
@@ -79,7 +79,7 @@ export default function Login() {
           </p>
         </div>
         <div className="flex flex-col gap-2  w-full px-4">
-          <h3 className="text-sm pl-1">Password</h3>
+          <h3 className="text-sm pl-1 font-semibold">Password</h3>
           <Input
             type="password"
             name="password"
@@ -92,7 +92,7 @@ export default function Login() {
         </div>
           <p className="pl-1 text-md font-semibold h-5">{loginError ? "Invalid crenditals" : ""}</p>
         <div className="flex flex-col gap-4 justify-center items-center">
-          <Button className="bg-primary text-gray-200 font-normal">
+          <Button className="bg-white/10 px-8 text-gray-800 border border-white font-semibold flex items-center justify-center py-1 rounded-md hover:bg-white/50 hover:border-transparent duration-200">
             Continue
           </Button>
           <p className="text-sm">

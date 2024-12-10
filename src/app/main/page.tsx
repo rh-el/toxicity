@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import PostCard from "./PostCard";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { MutatingDots } from "react-loader-spinner";
-import { Heading4 } from "lucide-react";
 
 interface PostType {
   id: bigint;
@@ -38,7 +37,13 @@ export default function Home() {
       setPostData(prev => ([...prev , postInfos.postInfos[0]]))
       setLastFetchedId(postInfos.postInfos[0].id)
 
+      console.log(lastFetchedId)
+      if (lastFetchedId === 607) {
+        setHasMore(false)
+      }
+
     } catch (error) {
+      // setHasMore(false)
       console.error(error)
       // setHasMore(false)
     } 
@@ -84,8 +89,8 @@ export default function Home() {
             visible={true}
             height="100"
             width="100"
-            color="rgb(178, 255, 216)"
-            secondaryColor="rgb(255, 133, 128)"
+            color="rgb(0, 0, 0)"
+            secondaryColor="rgb(0, 0, 0)"
             radius="20"
             ariaLabel="mutating-dots-loading"
             wrapperStyle={{}}

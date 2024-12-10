@@ -53,7 +53,7 @@ const Like = ({ postId }: Props) => {
         })
   
           if (likeData.isLikedByUser) {
-              colorLike('#ff0000', 0.5)
+              colorLike('#b2ffd8', 0.5)
           } else {
               colorLike('#000000', 1)
           }
@@ -96,7 +96,7 @@ const Like = ({ postId }: Props) => {
             likeCount: prev.postIsLike ? prev.likeCount - 1 : prev.likeCount + 1
         }))
         if (!likeStatus.postIsLike) {
-            colorLike('#ff0000', 0.5) 
+            colorLike('#b2ffd8', 0.5) 
             // setLikeStatus({postIsLike: !likeStatus.postIsLike, likeCount: likeStatus.likeCount +1})
         } else {
             colorLike('#000000', 1)
@@ -106,9 +106,9 @@ const Like = ({ postId }: Props) => {
 
     const handleLike = async () => {
         if (!likeStatus.postIsLike) {
-            await likePost(postId)
+            await likePost(postId as bigint)
         } else {
-            await unlikePost(postId)
+            await unlikePost(postId as bigint)
         }
         handleLikeColor()
     }
@@ -116,7 +116,7 @@ const Like = ({ postId }: Props) => {
     // console.log(likeStatus)
 
     useEffect(() => {
-        getLikeStatus(postId)
+        getLikeStatus(postId as bigint)
     }, [])
 
 

@@ -110,6 +110,7 @@ export default function Profile () {
             <div className="flex flex-col justify-between gap-8 py-4">
                 <div className="flex justify-between items-center">
                     <h2 className="font-quicksand font-bold text-3xl text-right">{profileData.profileData.username}</h2>
+                    
                     <Image
                         loader={() => imageLoader(profileData.profileData.avatar)}
                         height={80}
@@ -117,18 +118,18 @@ export default function Profile () {
                         src={profileData.profileData.avatar}
                         alt=""
                         priority
-                        className="rounded-full"
+                        className="rounded-full avatar"
                          />
                 </div>
                 <h3 className="font-bold">{profileData.profileData.bio}</h3>
                 <h4 className="text-gray-600">{profileData.followerCount} {profileData.followerCount > 1 ? "followers" : "follower"}</h4>
-                <Button onClick={handleFollow} className="bg-black text-white text-md">{profileData.isFollowed ? "Unfollow" : "Follow"}</Button>
+                <Button onClick={handleFollow} className="w-full bg-white/10 text-gray-800 border border-white flex items-center justify-center px-2 py-1 rounded-md hover:bg-white/50 hover:border-transparent duration-200 font-semibold text-md">{profileData.isFollowed ? "Unfollow" : "Follow"}</Button>
             </div>
         }
         <div className="flex flex-col gap-3 w-full">
-        {userPosts.userPosts && 
+        {userPosts.userPosts && profileData &&
             userPosts.userPosts.map((post, index) => (
-                <ProfilePostCard key={index} post={post} profileData={profileData?.profileData}/>
+                <ProfilePostCard key={index} post={post} profileData={profileData.profileData}/>
             ))
         }
         </div>

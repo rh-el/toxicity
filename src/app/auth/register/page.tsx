@@ -58,7 +58,7 @@ export default function Register() {
 
   return (
 
-      <form onSubmit={handleSubmit} className="card card-auth">
+      <form onSubmit={handleSubmit} className="card card-auth gradient-border">
         <h2 className="font-semibold">Register</h2>
         <div className="flex flex-col gap-2 w-full px-4">
           <h3 className="text-sm pl-1 font-semibold">Email</h3>
@@ -99,12 +99,12 @@ export default function Register() {
         <div className="flex flex-col gap-4 justify-center items-center">
           <Button
             type="submit"
-            className="bg-primary text-gray-200 font-normal"
+            className="bg-white/10 px-8 text-gray-800 border border-white font-semibold flex items-center justify-center py-1 rounded-md hover:bg-white/50 hover:border-transparent duration-200"
           >
             Continue
           </Button>
           <p className="text-sm">
-            Already on Weett?{" "}
+            Already on Toxicity?{" "}
             <Link className="underline font-semibold" href="/auth/login">
               Sign in
             </Link>

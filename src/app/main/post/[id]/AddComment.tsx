@@ -5,9 +5,6 @@ import Image from "next/image";
 import Cookies from "js-cookie";
 import { useRef } from "react";
 
-const imageLoader = (src: string, width?: number, quality?: number) => {
-  return `${src}?w=${width}&q=${quality}`;
-};
 
 interface userType {
   id: bigint;
@@ -78,20 +75,16 @@ const AddComment = ({ postId, setReloads }: Props) => {
   return (
     <div className="card-post">
       <div className="flex gap-3 w-full">
-        <div className="w-16">
+        <div className="relative min-w-12 min-h-12">
           {userData && (
             <Image
-              loader={() => imageLoader(userData.avatar)}
               height={50}
               width={50}
-              src={
-                userData.avatar
-                  ? userData.avatar
-                  : "https://jwyjrgwkkaqapgjqjlbb.supabase.co/storage/v1/object/sign/avatars/avatar.webp?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhdmF0YXJzL2F2YXRhci53ZWJwIiwiaWF0IjoxNzMzMzk2Njk5LCJleHAiOjE3NjQ5MzI2OTl9.s_WGrL3Ej4z9-UW5dDkUHwZgAC6fpFdqVWXOpJhYaq0&t=2024-12-05T11%3A04%3A59.556Z"
-              }
+              src={userData.avatar}
               alt=""
               priority
-              className="rounded-full"
+              className="avatar rounded-full"
+              unoptimized
             ></Image>
           )}
         </div>
@@ -99,17 +92,17 @@ const AddComment = ({ postId, setReloads }: Props) => {
           <h1 className="font-semibold pt-2">
             {userData?.username && userData!.username}
           </h1>
-          <form onSubmit={handleSubmit} className="flex flex-col">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <textarea
               ref={inputField}
               rows={2}
               name="content"
               placeholder="Enter your comment"
-              className="bg-white/30 flex-1 overflow-y-auto outline-none border-none font-light p-2 text-sm focus:ring-transparent focus:border focus:border-white placeholder-gray-400 rounded-t-md"
+              className="bg-white/30 flex-1 overflow-y-auto outline-none border-none font-light p-2 text-sm focus:ring-transparent focus:border focus:border-white placeholder-gray-400 rounded-md"
             />
             <button
               type="submit"
-              className="bg-white/30 text-gray-800 font-semibold flex items-end h-6 justify-end px-2 py-1 w-full rounded-b-md"
+              className="w-full bg-white/10 text-gray-800 border border-white font-semibold flex items-center justify-center px-2 py-1 rounded-md hover:bg-white/50 hover:border-transparent duration-200"
             >
               Send
             </button>

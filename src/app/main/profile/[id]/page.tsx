@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { useParams } from "next/navigation"
 import ProfilePostCard from "./ProfilePostCard"
 import { profile } from "console"
+import { useRouter } from "next/navigation"
 
 type ProfileDataType = {
     username: string;
@@ -47,6 +48,8 @@ export default function Profile () {
 
     const urlParams = useParams<{ id: string }>();
     const profile_id = urlParams.id;
+
+    const router = useRouter()
 
     const getProfileInfos = async (token: string) => {
         const response = await fetch(`/api/profile/${profile_id}`, {
@@ -97,6 +100,11 @@ export default function Profile () {
         }
     }
 
+    const logout = () => {
+        Cookies.remove('token')
+        router.push('/')
+    }
+
     useEffect(() => {
         if (Cookies.get('token')) {
             getProfileInfos(Cookies.get('token') as string)
@@ -123,7 +131,9 @@ export default function Profile () {
                 </div>
                 <h3 className="font-bold">{profileData.profileData.bio}</h3>
                 <h4 className="text-gray-600">{profileData.followerCount} {profileData.followerCount > 1 ? "followers" : "follower"}</h4>
-                <Button onClick={handleFollow} className="w-full bg-white/10 text-gray-800 border border-white flex items-center justify-center px-2 py-1 rounded-md hover:bg-white/50 hover:border-transparent duration-200 font-semibold text-md">{profileData.isFollowed ? "Unfollow" : "Follow"}</Button>
+                {Number(profile_id) !== 0 && <Button onClick={handleFollow} className="w-full bg-white/10 text-gray-800 border border-white flex items-center justify-center px-2 py-1 rounded-md hover:bg-white/50 hover:border-transparent duration-200 font-semibold text-md">{profileData.isFollowed ? "Unfollow" : "Follow"}</Button>}
+                {Number(profile_id) === 0 && <Button onClick={logout} className="w-full bg-white/10 text-gray-800 border border-white flex items-center justify-center px-2 py-1 rounded-md hover:bg-white/50 hover:border-transparent duration-200 font-semibold text-md">Logout</Button>}
+
             </div>
         }
         <div className="flex flex-col gap-3 w-full">

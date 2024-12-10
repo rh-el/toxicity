@@ -2,6 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db/prisma";
 import { match } from "assert";
 
+declare global {
+    interface BigInt {
+        toJSON(): number;
+    }
+}
+BigInt.prototype.toJSON = function () { return Number(this) }
+
 export async function GET(req:NextRequest) {
 
     try {

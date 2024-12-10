@@ -37,8 +37,7 @@ const CommentCard = ({ post }: Props) => {
       ></Image>
       <div className="flex flex-col gap-2 pb-3">
         <h1 className="font-semibold pt-2">{post.users.username}</h1>
-        {post.content} Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Nam nulla consequatur, earum nostrum corrupti nesciunt
+        {post.content}
       </div>
     </div>
   );

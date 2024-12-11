@@ -1,4 +1,4 @@
-"use client"
+"use client";
 // import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -6,7 +6,6 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { usePathname } from "next/navigation";
-
 
 const quickSand = localFont({
   src: "./fonts/Quicksand-VariableFont_wght.ttf",
@@ -17,8 +16,8 @@ const quickSand = localFont({
 const inter = localFont({
   src: "./fonts/Inter-VariableFont_opsz,wght.ttf",
   variable: "--font-inter",
-  weight: "100 900"
-})
+  weight: "100 900",
+});
 
 // export const metadata: Metadata = {
 //   title: "Create Next App",
@@ -30,24 +29,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const container = useRef<HTMLBodyElement | null>(null);
+  const pathname = usePathname();
+  const { contextSafe } = useGSAP();
 
-
-  const container = useRef<HTMLBodyElement | null>(null)
-  const pathname = usePathname()
-  const { contextSafe } = useGSAP()
-  
-  const animateGradient = contextSafe(
-      (
-        newStyle: string,
-      ) => {
-        gsap.to(container.current, {
-          duration: 2.5,
-          ease: "back.inOut",
-          backgroundAttachment: "fixed",
-          background: newStyle,
-        })
-      }
-  )
+  const animateGradient = contextSafe((newStyle: string) => {
+    gsap.to(container.current, {
+      duration: 2.5,
+      ease: "power4.inOut",
+      backgroundAttachment: "fixed",
+      background: newStyle,
+    });
+  });
 
   const loginBackgroundStyle = `
     radial-gradient(circle at 20% 30%, #d7eaff, transparent 60%),
@@ -59,7 +52,7 @@ export default function RootLayout({
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0)
     ),
-    linear-gradient(95deg, #e1f4ff, #ff7741)`
+    linear-gradient(95deg, #e1f4ff, #ff7741)`;
 
   const registerBackgroundStyle = `
     radial-gradient(circle at 90% 70%, #d7eaff, transparent 50%),
@@ -67,7 +60,7 @@ export default function RootLayout({
     radial-gradient(circle at 95% 15%, #9ba0ff, transparent 50%),
     radial-gradient(circle at 20% 35%, #b2ffd8, transparent 50%),
     linear-gradient(to bottom right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)),
-    linear-gradient(135deg, #e1f4ff, #ff7741)`
+    linear-gradient(135deg, #e1f4ff, #ff7741)`;
 
   const mainBackgroundStyle = `
     radial-gradient(circle at 10% 20%, #fbcaca, transparent 70%),
@@ -79,8 +72,8 @@ export default function RootLayout({
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0)
     ),
-    linear-gradient(144deg, #b2ffd8, #e1f4ff)`
-  
+    linear-gradient(144deg, #b2ffd8, #e1f4ff)`;
+
   const addPostBackgroundStyle = `
     radial-gradient(circle at 90% 90%, #75e8d6, transparent 40%),
     radial-gradient(circle at 70% 65%, #ffffff, transparent 40%),
@@ -91,8 +84,8 @@ export default function RootLayout({
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0)
     ),
-    linear-gradient(232deg, #6ffdf6ab, #ffac00)`
-  
+    linear-gradient(232deg, #6ffdf6ab, #ffac00)`;
+
   const searchBackgroundStyle = `
     radial-gradient(circle at 10% 10%, #75e8d6, transparent 60%),
     radial-gradient(circle at 30% 85%, #ffffff, transparent 30%),
@@ -103,7 +96,7 @@ export default function RootLayout({
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0)
     ),
-    linear-gradient(0deg, #bfabf7, #ffac00)`
+    linear-gradient(0deg, #bfabf7, #ffac00)`;
 
   const profileBackgroundStyle = `
     radial-gradient(circle at 45% 90%, #75e8d6, transparent 80%),
@@ -115,36 +108,33 @@ export default function RootLayout({
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0)
     ),
-    linear-gradient(0deg, #f79696, #ffac00)`
-
+    linear-gradient(0deg, #f79696, #ffac00)`;
 
   useEffect(() => {
     if (pathname === "/auth/register") {
-      animateGradient(registerBackgroundStyle)
+      animateGradient(registerBackgroundStyle);
     }
-  
+
     if (pathname === "/auth/login") {
-      animateGradient(loginBackgroundStyle)
+      animateGradient(loginBackgroundStyle);
     }
 
     if (pathname === "/main") {
-      animateGradient(mainBackgroundStyle)
+      animateGradient(mainBackgroundStyle);
     }
 
     if (pathname === "/main/add-post") {
-      animateGradient(addPostBackgroundStyle)
+      animateGradient(addPostBackgroundStyle);
     }
 
     if (pathname === "/main/search") {
-      animateGradient(searchBackgroundStyle)
+      animateGradient(searchBackgroundStyle);
     }
 
     if (pathname.startsWith("/main/profile")) {
-      animateGradient(profileBackgroundStyle)
+      animateGradient(profileBackgroundStyle);
     }
-
-  })
-
+  });
 
   return (
     <html lang="en">
@@ -152,7 +142,7 @@ export default function RootLayout({
         className={`${inter.variable} ${quickSand.variable} container antialiased`}
         ref={container}
       >
-          {children}
+        {children}
       </body>
     </html>
   );

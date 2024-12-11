@@ -24,16 +24,14 @@ export default function Home() {
 
     try {
 
-      const idToFetch = lastFetchedId -1
+      const idToFetch = lastFetchedId - 1
       const response = await fetch(`/api/next-post/${idToFetch}`)
-      console.log('inside fetch next data') 
       if (!response.ok) {
 
         throw new Error("Error while fetching next post");
 
       }
       const postInfos = await response.json()
-      
       setPostData(prev => ([...prev , postInfos.postInfos[0]]))
       setLastFetchedId(postInfos.postInfos[0].id)
 
@@ -43,16 +41,13 @@ export default function Home() {
       }
 
     } catch (error) {
-      // setHasMore(false)
       console.error(error)
-      // setHasMore(false)
     } 
   }
 
 
   const fetchFirstPosts = async () => {
     try {
-      console.log('INSIDE FETCH FIRST POSTS')
 
       const response = await fetch(`/api/next-post/0`)
 
@@ -64,11 +59,10 @@ export default function Home() {
       const postInfos = await response.json()
 
       setPostData(postInfos.postInfos)
-      setLastFetchedId(postInfos.postInfos[4].id)
+      setLastFetchedId(postInfos.postInfos[7].id)
 
     } catch (error) {
       console.error(error)
-      // setHasMore(false)
     }
   }
 
@@ -79,29 +73,32 @@ export default function Home() {
   return (
     <>
       <div className="flex flex-col gap-3 w-full">
-        <InfiniteScroll
-          dataLength={postData.length}
-          next={fetchNextData}
-          hasMore={hasMore}
-          className={'flex flex-col gap-3 w-full '}
-          loader={
-          <MutatingDots 
-            visible={true}
-            height="100"
-            width="100"
-            color="rgb(0, 0, 0)"
-            secondaryColor="rgb(0, 0, 0)"
-            radius="20"
-            ariaLabel="mutating-dots-loading"
-            wrapperStyle={{}}
-            wrapperClass="w-full flex justify-center"
-            />
-          }
-        >
-        {postData.map((post: PostType, index) => (
-          <PostCard key={index} post={post} />
-        ))}
-        </InfiniteScroll>
+        { postData.length !== 0 &&
+
+          <InfiniteScroll
+            dataLength={postData.length}
+            next={fetchNextData}
+            hasMore={hasMore}
+            className={'flex flex-col gap-3 w-full '}
+            loader={
+            <MutatingDots 
+              visible={true}
+              height="100"
+              width="100"
+              color="rgb(0, 0, 0)"
+              secondaryColor="rgb(0, 0, 0)"
+              radius="20"
+              ariaLabel="mutating-dots-loading"
+              wrapperStyle={{}}
+              wrapperClass="w-full flex justify-center"
+              />
+            }
+          >
+          {postData.map((post: PostType, index) => (
+            <PostCard key={index} post={post} />
+          ))}
+          </InfiniteScroll>
+        }
       </div>
     </>
   );

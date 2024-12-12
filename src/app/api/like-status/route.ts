@@ -1,6 +1,6 @@
 import prisma from "@/lib/db/prisma";
 import { NextResponse } from "next/server";
-import { verifyToken } from "../token/route";
+import { verifyToken } from '@/app/actions/actions'
 
 export async function GET(req: Request) {
 

@@ -1,4 +1,4 @@
-import { verifyToken } from "../../token/route";
+import { verifyToken } from '@/app/actions/actions'
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db/prisma";
 

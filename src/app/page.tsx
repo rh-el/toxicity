@@ -2,12 +2,11 @@
 
 import { useRouter } from 'next/navigation'
 import Cookies from "js-cookie"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 export default function Landing() {
 
   const router = useRouter()
-  // const [isLoading, setIsLoading ] = useState<boolean>(true)
 
   useEffect(() => {
     const checkToken = async () => {

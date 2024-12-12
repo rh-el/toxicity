@@ -15,7 +15,7 @@ interface userType {
 
 const AddPost = () => {
   const router = useRouter();
-  const inputField = useRef<any>();
+  const inputField = useRef<HTMLTextAreaElement>(null);
   const [userData, setUserData] = useState<userType>();
 
   const getUserInfo = async () => {
@@ -60,7 +60,10 @@ const AddPost = () => {
         throw new Error("Registration error");
       }
       await response.json();
-      inputField.current.value = "";
+      if (inputField.current) {
+        inputField.current.value = "";
+
+      }
       router.push("/main");
     } catch (error) {
       console.error(error);

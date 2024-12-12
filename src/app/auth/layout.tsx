@@ -1,10 +1,5 @@
 "use client"
 
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { useEffect } from "react";
-
-
 export default function AuthLayout({
   children,
 }: Readonly<{

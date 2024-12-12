@@ -14,7 +14,7 @@ BigInt.prototype.toJSON = function () { return Number(this) }
 
 
 
-export async function GET(req: Request) {
+export async function GET() {
 
     try {
         const headersList = await headers()

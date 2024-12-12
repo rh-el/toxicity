@@ -15,7 +15,7 @@ interface PostType {
 }
 
 const AddPost = () => {
-  const inputField = useRef<any>();
+  const inputField = useRef<HTMLInputElement>(null);
   const [postData, setPostData] = useState<PostType[]>([]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -33,7 +33,9 @@ const AddPost = () => {
       const data = await response.json();
       console.log(data);
       setPostData(data.matchedPosts);
-      inputField.current.value = "";
+      if (inputField.current) {
+        inputField.current.value = "";
+      }
     } catch (error) {
       console.error(error);
       return error;

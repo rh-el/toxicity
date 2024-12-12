@@ -1,32 +1,12 @@
 import dotenv from 'dotenv'
-import jwt from 'jsonwebtoken'
 import {NextResponse} from "next/server"
-import { decode } from 'punycode'
+import { verifyToken } from '@/app/actions/actions'
 
 
 dotenv.config()
 
-type DecodedType = {
-    id: number
-}
 
-export const verifyToken = (token: string | undefined): number | boolean => {
-    if (token && process.env.TOKEN_SECRET) {
-        
-        try {
 
-            const decoded = jwt.verify(token, process.env.TOKEN_SECRET) as DecodedType;
-            return decoded.id;
-
-        } catch (err) {
-
-            throw new Error('invalid token');
-            
-        }
-    } else {
-        return false;
-    }
-}
 export async function GET(req:Request) {
 
     try {

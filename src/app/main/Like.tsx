@@ -1,5 +1,5 @@
-import React, { SetStateAction } from 'react';
-import { useRef, useState, useEffect, Dispatch } from 'react';
+import React, { useCallback } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react';
 import Cookies from "js-cookie";
@@ -45,26 +45,28 @@ const Like = ({ postId }: Props) => {
         })
     })
 
-    const getLikeStatus = async (postId: bigint) => {
-        const strId = String(postId)
-          const response = await fetch('/api/like-status', {
-          headers: {
-            authorization: `Bearer ${Cookies.get('token')}`,
-            post_id: strId
-          }
-          })
-          const likeData = await response.json()
-          setLikeStatus({
-            postIsLike: !!likeData.isLikedByUser, 
-            likeCount: likeData.likeCount
-        })
-  
-          if (likeData.isLikedByUser) {
-            initColor('#b2ffd8')
-          } else {
-            initColor('#000000')
-          }
-      }
+    const getLikeStatus = useCallback(
+        async (postId: bigint) => {
+            const strId = String(postId)
+              const response = await fetch('/api/like-status', {
+              headers: {
+                authorization: `Bearer ${Cookies.get('token')}`,
+                post_id: strId
+              }
+              })
+              const likeData = await response.json()
+              setLikeStatus({
+                postIsLike: !!likeData.isLikedByUser, 
+                likeCount: likeData.likeCount
+            })
+      
+              if (likeData.isLikedByUser) {
+                initColor('#b2ffd8')
+              } else {
+                initColor('#000000')
+              }
+          }, [initColor]
+    ) 
 
     const likePost = async (postId: bigint) => {
         const response = await fetch('/api/like', {
@@ -120,11 +122,9 @@ const Like = ({ postId }: Props) => {
         handleLikeColor()
     }
 
-    // console.log(likeStatus)
-
     useEffect(() => {
         getLikeStatus(postId as bigint)
-    }, [])
+    }, [getLikeStatus, postId])
 
 
 

@@ -2,8 +2,7 @@ import prisma from "@/lib/db/prisma";
 import {NextResponse} from "next/server"
 import dotenv from 'dotenv'
 import { headers } from "next/headers";
-import { verifyToken } from "../token/route";
-
+import { verifyToken } from '@/app/actions/actions'
 
 declare global {
     interface BigInt {

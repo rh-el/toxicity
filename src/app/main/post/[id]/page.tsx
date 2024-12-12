@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams } from "next/navigation";
 import CommentFeed from "./CommentFeed";
 import FocusedPost from "./FocusedPost";
@@ -16,30 +16,31 @@ interface PostType {
   };
 }
 
-export default function PostFocus({ params }: { params: { id: string } }) {
+export default function PostFocus() {
   const [focusInfo, setFocusInfo] = useState<PostType>();
   const [reloads, setReloads] = useState<number>(0);
 
   const urlParams = useParams<{ id: string }>();
   const post_id = urlParams.id;
 
-  const getPostInfo = async () => {
-    const response = await fetch("/api/post", {
-      method: "GET",
-      headers: {
-        post_id: post_id,
-      },
-    });
-    if (!response.ok) {
-      throw new Error("Login error");
-    }
-    const data = await response.json();
-    setFocusInfo(data);
-  };
+  const getPostInfo = useCallback(
+    async () => {
+      const response = await fetch("/api/post", {
+        method: "GET",
+        headers: {
+          post_id: post_id,
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Login error");
+      }
+      const data = await response.json();
+      setFocusInfo(data);
+    }, [post_id]) 
 
   useEffect(() => {
     getPostInfo();
-  }, []);
+  }, [getPostInfo]);
 
   let post: PostType | undefined = undefined;
   if (focusInfo) {

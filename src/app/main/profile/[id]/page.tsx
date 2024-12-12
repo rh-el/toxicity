@@ -1,12 +1,11 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import Cookies from "js-cookie"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { useParams } from "next/navigation"
 import ProfilePostCard from "./ProfilePostCard"
-import { profile } from "console"
 import { useRouter } from "next/navigation"
 
 type ProfileDataType = {
@@ -51,25 +50,29 @@ export default function Profile () {
 
     const router = useRouter()
 
-    const getProfileInfos = async (token: string) => {
-        const response = await fetch(`/api/profile/${profile_id}`, {
-            headers: {
-                authorization: `Bearer ${token}`
-              },
-        })
-        const profileData = await response.json()
-        setProfileData(profileData)
-    }
+    const getProfileInfos = useCallback(
+        async (token: string) => {
+            const response = await fetch(`/api/profile/${profile_id}`, {
+                headers: {
+                    authorization: `Bearer ${token}`
+                  },
+            })
+            const profileData = await response.json()
+            setProfileData(profileData)
+        }, [profile_id]
+    ) 
 
-    const getAllPosts = async (token: string) => {
-        const response = await fetch(`/api/user-posts/${profile_id}`, {
-            headers: {
-                authorization: `Bearer ${token}`
-            }
-        })
-        const userPosts = await response.json()
-        setUserPosts(userPosts)
-    }
+    const getAllPosts = useCallback(
+        async (token: string) => {
+            const response = await fetch(`/api/user-posts/${profile_id}`, {
+                headers: {
+                    authorization: `Bearer ${token}`
+                }
+            })
+            const userPosts = await response.json()
+            setUserPosts(userPosts)
+        }, [profile_id]
+    ) 
 
     const handleFollow = async () => {
         try {
@@ -110,7 +113,7 @@ export default function Profile () {
             getProfileInfos(Cookies.get('token') as string)
             getAllPosts(Cookies.get('token') as string)
         }
-    }, [])
+    }, [getProfileInfos, getAllPosts])
 
     return (
         <>

@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { Dispatch, FormEvent, SetStateAction, useEffect, useState } from "react";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import { useRef } from "react";
@@ -15,11 +15,11 @@ interface userType {
 
 interface Props {
   postId: bigint;
-  setReloads: any;
+  setReloads: Dispatch<SetStateAction<number>>;
 }
 
 const AddComment = ({ postId, setReloads }: Props) => {
-  const inputField = useRef<any>();
+  const inputField = useRef<HTMLTextAreaElement>(null);
   const [userData, setUserData] = useState<userType>();
 
   const getCommenterInfo = async () => {
@@ -64,7 +64,9 @@ const AddComment = ({ postId, setReloads }: Props) => {
       }
       const data = await response.json();
       console.log(data);
-      inputField.current.value = "";
+      if (inputField.current) {
+        inputField.current.value = "";
+      }
       setReloads((prev: number) => prev + 1);
     } catch (error) {
       console.error(error);

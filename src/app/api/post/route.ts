@@ -11,7 +11,7 @@ declare global {
 }
 BigInt.prototype.toJSON = function () { return Number(this) }
 
-export async function GET(req: Request) {
+export async function GET() {
     const headersList = await headers()
     const post_id = headersList.get('post_id')
     const parsedId = parseInt(post_id!)

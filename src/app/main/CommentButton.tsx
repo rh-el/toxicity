@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 interface CommentButton {
   id: bigint | number;
@@ -8,23 +8,26 @@ interface CommentButton {
 const CommentButton = ({ id }: CommentButton) => {
   const [commentCount, setCommentCount] = useState<number>();
 
-  const getCommentCount = async () => {
-    const response = await fetch("/api/count-comments", {
-      method: "GET",
-      headers: {
-        post_id: JSON.stringify(id),
-      },
-    });
-    if (!response.ok) {
-      throw new Error("Login error");
-    }
-    const data = await response.json();
-    setCommentCount(data);
-  };
+  
+  const getCommentCount = useCallback(
+    async () => {
+      const response = await fetch("/api/count-comments", {
+        method: "GET",
+        headers: {
+          post_id: JSON.stringify(id),
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Login error");
+      }
+      const data = await response.json();
+      setCommentCount(data);
+    }, [id]
+  ) 
 
   useEffect(() => {
     getCommentCount();
-  }, []);
+  }, [getCommentCount]);
 
   return (
     <>

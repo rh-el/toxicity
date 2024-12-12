@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Like from "../../Like";
-import Cookies from "js-cookie";
 import CommentButton from "../../CommentButton";
 
 interface PostType {

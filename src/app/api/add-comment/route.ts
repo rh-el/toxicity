@@ -1,6 +1,5 @@
 import prisma from "@/lib/db/prisma";
 import {NextResponse} from "next/server"
-import { hashPassword, generateToken } from "@/app/utils/utils";
 import dotenv from 'dotenv'
 
 

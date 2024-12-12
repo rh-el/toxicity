@@ -9,9 +9,14 @@ export default function MainLayout({
 }>) {
   return (
     <div className="items-center h-full">
-      <h3 className="header font-quicksand font-bold text-3xl p-3 text-right">
-        toxicity
-      </h3>
+      <div className="flex justify-end header font-quicksand font-bold text-3xl p-3">
+        <Link href="/main">
+          <h3>
+            toxicity
+          </h3>
+        </Link>
+
+      </div>
       <div className="main-container no-scrollbar h-full">{children}</div>
       <nav className="navbar flex flex-row justify-around py-3 md:flex-col md:h-svh md:w-16 md:items-center">
         <Link href="/main">

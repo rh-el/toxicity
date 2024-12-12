@@ -26,7 +26,6 @@ type Props = {
 }
 
 const ProfilePostCard = ( {post, profileData}: Props) => {
-  console.log(profileData)
     return (
         <div className="card card-post">
           <div className="relative min-w-12 min-h-12">

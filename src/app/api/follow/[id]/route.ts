@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
               following_id: followingId
             },
         })
-        console.log(follow)
+        
 
         return NextResponse.json({follow});
 

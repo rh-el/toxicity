@@ -20,7 +20,6 @@ const Like = ({ postId }: Props) => {
     const container = useRef<HTMLDivElement | null>(null)
     const likeClass = `like-icon-${postId}`
     const [ likeStatus, setLikeStatus ] = useState<LikeStatusType>({postIsLike: false, likeCount: 0})
-
     const { contextSafe } = useGSAP();
     const colorLike = contextSafe(
         (
@@ -65,7 +64,7 @@ const Like = ({ postId }: Props) => {
               } else {
                 initColor('#000000')
               }
-          }, [initColor]
+          }, []
     ) 
 
     const likePost = async (postId: bigint) => {

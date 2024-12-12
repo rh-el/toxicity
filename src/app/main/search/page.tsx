@@ -31,7 +31,6 @@ const AddPost = () => {
         throw new Error("Search error");
       }
       const data = await response.json();
-      console.log(data);
       setPostData(data.matchedPosts);
       if (inputField.current) {
         inputField.current.value = "";

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import PostCard from "./PostCard";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { MutatingDots } from "react-loader-spinner";
+import Shape from "../Shape";
 
 interface PostType {
   id: bigint;
@@ -35,7 +36,6 @@ export default function Home() {
       setPostData(prev => ([...prev , postInfos.postInfos[0]]))
       setLastFetchedId(postInfos.postInfos[0].id)
 
-      console.log(lastFetchedId)
       if (lastFetchedId === 607) {
         setHasMore(false)
       }

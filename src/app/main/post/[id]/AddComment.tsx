@@ -62,8 +62,7 @@ const AddComment = ({ postId, setReloads }: Props) => {
       if (!response.ok) {
         throw new Error("Registration error");
       }
-      const data = await response.json();
-      console.log(data);
+      await response.json();
       if (inputField.current) {
         inputField.current.value = "";
       }

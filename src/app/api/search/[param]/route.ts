@@ -14,8 +14,6 @@ export async function GET(req:NextRequest) {
 
         const paramContent = `#${req.nextUrl.pathname.split('/').pop()}`
 
-        console.log(paramContent)
-
         const matchedPosts = await prisma.posts.findMany({
                 where: {
                     content: {

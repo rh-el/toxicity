@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react";
 import PostCard from "./PostCard";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { MutatingDots } from "react-loader-spinner";
-import Shape from "../Shape";
+import { MutatingDots } from "react-loader-spinner"; 
 
 interface PostType {
   id: bigint;

@@ -7,6 +7,7 @@ body {
   min-width: 100%;
   box-sizing: border-box;
   clip-path: border-box;
+  min-height: 100svh;
 }
 
 .header {
@@ -26,9 +27,10 @@ body {
   background: rgba(255, 255, 255, 0.26);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
-  position: sticky;
+  position: fixed;
   bottom: 0;
   z-index: 10;
+  width: 100%;
 }
 
 .shape {
@@ -65,8 +67,7 @@ body {
 }
 
 .main-container {
-  padding: 1rem 1rem 1rem 1rem;
-  /* overflow: scroll; */
+  padding: 1rem 1rem 4rem 1rem;
   width: 100%;
   min-height: calc(100svh - 112px);
   @media (min-width: 768px) {

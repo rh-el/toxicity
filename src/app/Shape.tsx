@@ -20,11 +20,7 @@ export default function Shape() {
 
   return (
     <>
-      {/* <div className="shape absolute" ref={parallax.ref} > */}
-        {/* <div className='gradient-border-bg'></div> */}
-      {/* </div> */}
       <div className='shape absolute' ref={parallax.ref} ></div>
-
       <div className='shape2 absolute' ref={parallax2.ref} ></div>
     </>
   );

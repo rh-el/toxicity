@@ -16,6 +16,7 @@ interface PostType {
 }
 
 export default function Home() {
+  
   const [postData, setPostData] = useState<PostType[]>([]);
   const [ lastFetchedId, setLastFetchedId ] = useState<number>(0)
   const [hasMore, setHasMore] = useState<boolean>(true);

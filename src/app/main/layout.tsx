@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 
+
 export default function MainLayout({
   children,
 }: Readonly<{
@@ -17,7 +18,7 @@ export default function MainLayout({
         </Link>
 
       </div>
-      <div className="main-container no-scrollbar h-full">{children}</div>
+      <div className="main-container font- no-scrollbar h-full">{children}</div>
       <nav className="navbar flex flex-row justify-around py-3 md:flex-col md:h-svh md:w-16 md:items-center">
         <Link href="/main">
           <svg

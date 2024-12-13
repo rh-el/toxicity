@@ -9,6 +9,6 @@ It involved UI design and mock up on Figma, frontend components conception, user
 #### Framework
 NextJS
 ### Frontend
-React, TailwindCSS, Shadcn/UI, Typescript
+React, TailwindCSS, Shadcn/UI, Typescript, GSAP
 ### Backend
 Prisma, Typescript, Supabase

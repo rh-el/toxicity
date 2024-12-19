@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Like from "../../Like";
 import CommentButton from "../../CommentButton";
+import Avatar from "boring-avatars";
 
 interface PostType {
   id: bigint;
@@ -21,17 +21,13 @@ const FocusedPost = ({ post }: Props) => {
     <div className="card card-post flex-col">
       <div className="flex gap-3">
         <div className="relative min-w-12 min-h-12">
-          <Image
-            height={50}
-            width={50}
-            src={post.users.avatar}
-            alt=""
-            priority
-            className="avatar rounded-full"
-            unoptimized
-          ></Image>
+          <Avatar
+            name={String(post.users.id)}
+            size={50}
+            colors={["#d7eaff", "#ff8580", "#9ba0ff", "#b2ffd8"]}
+          />
         </div>
-        
+
         <h1 className="font-semibold pt-2">{post.users.username}</h1>
       </div>
       <div className="flex flex-col gap-2">

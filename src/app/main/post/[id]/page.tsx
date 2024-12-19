@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import CommentFeed from "./CommentFeed";
 import FocusedPost from "./FocusedPost";
 import AddComment from "./AddComment";
+import { useRouter } from "next/navigation";
 
 interface PostType {
   id: bigint;
@@ -23,20 +24,19 @@ export default function PostFocus() {
   const urlParams = useParams<{ id: string }>();
   const post_id = urlParams.id;
 
-  const getPostInfo = useCallback(
-    async () => {
-      const response = await fetch("/api/post", {
-        method: "GET",
-        headers: {
-          post_id: post_id,
-        },
-      });
-      if (!response.ok) {
-        throw new Error("Login error");
-      }
-      const data = await response.json();
-      setFocusInfo(data);
-    }, [post_id]) 
+  const getPostInfo = useCallback(async () => {
+    const response = await fetch("/api/post", {
+      method: "GET",
+      headers: {
+        post_id: post_id,
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Login error");
+    }
+    const data = await response.json();
+    setFocusInfo(data);
+  }, [post_id]);
 
   useEffect(() => {
     getPostInfo();

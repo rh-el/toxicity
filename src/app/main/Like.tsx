@@ -36,12 +36,15 @@ const Like = ({ postId }: Props) => {
     });
   });
 
-  const initColor = useCallback((color: string) => {
-    gsap.to(`.${likeClass}`, {
-      fill: color,
-      duration: 0.4,
-    });
-  }, [likeClass]);
+  const initColor = useCallback(
+    (color: string) => {
+      gsap.to(`.${likeClass}`, {
+        fill: color,
+        duration: 0.4,
+      });
+    },
+    [likeClass]
+  );
 
   const getLikeStatus = useCallback(
     async (postId: bigint) => {
@@ -63,7 +66,8 @@ const Like = ({ postId }: Props) => {
       } else {
         initColor("#000000");
       }
-    }, [initColor]
+    },
+    [initColor]
   );
 
   const likePost = async (postId: bigint) => {
@@ -122,7 +126,7 @@ const Like = ({ postId }: Props) => {
 
   useEffect(() => {
     getLikeStatus(postId as bigint);
-  }, [getLikeStatus, postId]);
+  }, [postId]);
 
   return (
     <>

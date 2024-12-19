@@ -20,25 +20,24 @@ interface CommentFeed {
 export default function CommentFeed({ postId }: CommentFeed) {
   const [commentData, setCommentData] = useState<PostType[]>([]);
 
-  const getCommentInfo = useCallback(
-    async () => {
-      try {
-        const response = await fetch(`/api/comment-feed`, {
-          method: "GET",
-          headers: {
-            post_id: postId,
-          },
-        });
-        if (!response.ok) {
-          throw new Error("Error while fetching next post");
-        }
-        const data = await response.json();
-  
-        setCommentData(data);
-      } catch (error) {
-        console.error(error);
+  const getCommentInfo = useCallback(async () => {
+    try {
+      const response = await fetch(`/api/comment-feed`, {
+        method: "GET",
+        headers: {
+          post_id: postId,
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Error while fetching next post");
       }
-    }, [postId]) 
+      const data = await response.json();
+
+      setCommentData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [postId]);
 
   useEffect(() => {
     getCommentInfo();

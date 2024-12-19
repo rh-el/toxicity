@@ -32,7 +32,6 @@ export async function GET(req:NextRequest) {
           id: userId
         },
         select: {
-          avatar: true,
           bio: true,
           username: true
         }

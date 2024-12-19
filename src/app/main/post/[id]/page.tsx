@@ -5,7 +5,6 @@ import { useParams } from "next/navigation";
 import CommentFeed from "./CommentFeed";
 import FocusedPost from "./FocusedPost";
 import AddComment from "./AddComment";
-import { useRouter } from "next/navigation";
 
 interface PostType {
   id: bigint;
@@ -13,7 +12,6 @@ interface PostType {
   users: {
     id: bigint;
     username: string;
-    avatar: string;
   };
 }
 
@@ -50,7 +48,6 @@ export default function PostFocus() {
       users: {
         id: focusInfo.users.id,
         username: focusInfo.users.username,
-        avatar: focusInfo.users.avatar,
       },
     };
   }

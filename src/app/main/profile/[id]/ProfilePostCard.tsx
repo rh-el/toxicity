@@ -8,7 +8,6 @@ interface PostType {
   users?: {
     id: bigint;
     username: string;
-    avatar: string;
   };
   _count?: {
     likes: number;
@@ -22,7 +21,6 @@ type Props = {
     | {
         id: bigint;
         username: string;
-        avatar: string;
         bio: string;
       }
     | undefined;

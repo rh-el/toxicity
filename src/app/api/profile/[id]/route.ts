@@ -22,7 +22,6 @@ export async function GET(req:NextRequest) {
                 select: {
                     id: true,
                     username: true,
-                    avatar: true,
                     bio: true
                 }
             }),

@@ -11,7 +11,6 @@ interface PostType {
   users: {
     id: bigint;
     username: string;
-    avatar: string;
   };
 }
 

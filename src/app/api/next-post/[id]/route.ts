@@ -19,8 +19,7 @@ const getLastPostInfos = async () => {
             users: {
                 select: {
                     id: true,
-                    username: true,
-                    avatar: true
+                    username: true
                 }
             }
         },
@@ -40,8 +39,7 @@ const getPostInfos = async (id: number) => {
             users: {
                 select: {
                     id: true,
-                    username: true,
-                    avatar: true
+                    username: true
                 }
             }
         },

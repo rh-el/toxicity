@@ -9,7 +9,6 @@ import Avatar from "boring-avatars";
 interface userType {
   id: bigint;
   username: string;
-  avatar: string;
   bio: string;
 }
 

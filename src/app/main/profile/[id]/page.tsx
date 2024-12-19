@@ -11,7 +11,6 @@ import Avatar from "boring-avatars";
 type ProfileDataType = {
   id: bigint;
   username: string;
-  avatar: string;
   bio: string;
 };
 

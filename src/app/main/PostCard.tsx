@@ -10,7 +10,6 @@ interface PostType {
   users?: {
     id: bigint;
     username: string;
-    avatar: string;
   };
   _count?: {
     likes: number;

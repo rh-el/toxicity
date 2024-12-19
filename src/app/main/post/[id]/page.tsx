@@ -12,7 +12,6 @@ interface PostType {
   users: {
     id: bigint;
     username: string;
-    avatar: string;
   };
 }
 
@@ -23,20 +22,19 @@ export default function PostFocus() {
   const urlParams = useParams<{ id: string }>();
   const post_id = urlParams.id;
 
-  const getPostInfo = useCallback(
-    async () => {
-      const response = await fetch("/api/post", {
-        method: "GET",
-        headers: {
-          post_id: post_id,
-        },
-      });
-      if (!response.ok) {
-        throw new Error("Login error");
-      }
-      const data = await response.json();
-      setFocusInfo(data);
-    }, [post_id]) 
+  const getPostInfo = useCallback(async () => {
+    const response = await fetch("/api/post", {
+      method: "GET",
+      headers: {
+        post_id: post_id,
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Login error");
+    }
+    const data = await response.json();
+    setFocusInfo(data);
+  }, [post_id]);
 
   useEffect(() => {
     getPostInfo();
@@ -50,7 +48,6 @@ export default function PostFocus() {
       users: {
         id: focusInfo.users.id,
         username: focusInfo.users.username,
-        avatar: focusInfo.users.avatar,
       },
     };
   }

@@ -11,13 +11,10 @@ export default function MainLayout({
     <div className="items-center h-full">
       <div className="flex justify-end header font-quicksand font-bold text-3xl p-3">
         <Link href="/main">
-          <h3>
-            toxicity
-          </h3>
+          <h3>toxicity</h3>
         </Link>
-
       </div>
-      <div className="main-container no-scrollbar h-full">{children}</div>
+      <div className="main-container font- no-scrollbar h-full">{children}</div>
       <nav className="navbar flex flex-row justify-around py-3 md:flex-col md:h-svh md:w-16 md:items-center">
         <Link href="/main">
           <svg

@@ -1,15 +1,14 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import Image from "next/image";
 import Cookies from "js-cookie";
 import { useRef } from "react";
 import { useRouter } from "next/navigation";
+import Avatar from "boring-avatars";
 
 interface userType {
   id: bigint;
   username: string;
-  avatar: string;
   bio: string;
 }
 
@@ -62,7 +61,6 @@ const AddPost = () => {
       await response.json();
       if (inputField.current) {
         inputField.current.value = "";
-
       }
       router.push("/main");
     } catch (error) {
@@ -76,15 +74,11 @@ const AddPost = () => {
       <div className="flex gap-3 w-full">
         <div className="relative min-w-12 min-h-12">
           {userData && (
-            <Image
-              height={50}
-              width={50}
-              src={userData.avatar}
-              alt=""
-              priority
-              className="avatar rounded-full"
-              unoptimized
-            ></Image>
+            <Avatar
+              name={String(userData.id)}
+              size={50}
+              colors={["#d7eaff", "#ff8580", "#9ba0ff", "#b2ffd8"]}
+            />
           )}
         </div>
         <div className="flex flex-col gap-2 pb-3 w-full">
@@ -99,13 +93,12 @@ const AddPost = () => {
               placeholder="What's up?"
               className="bg-white/30 flex-1 overflow-y-auto outline-none border-none font-light p-2 text-sm focus:ring-transparent focus:border focus:border-white placeholder-gray-400 rounded-md"
             />
-              <button
-                type="submit"
-                className="w-full bg-white/10 text-gray-800 border border-white font-semibold flex items-center justify-center px-2 py-1 rounded-md hover:bg-white/50 hover:border-transparent duration-200"
-              >
-                Send
-              </button>
-
+            <button
+              type="submit"
+              className="w-full bg-white/10 text-gray-800 border border-white font-semibold flex items-center justify-center px-2 py-1 rounded-md hover:bg-white/50 hover:border-transparent duration-200"
+            >
+              Send
+            </button>
           </form>
         </div>
       </div>

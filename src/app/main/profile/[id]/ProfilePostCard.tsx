@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Like from "../../Like";
 import CommentButton from "../../CommentButton";
+import Avatar from "boring-avatars";
 
 interface PostType {
   id: bigint | number;
@@ -8,50 +8,45 @@ interface PostType {
   users?: {
     id: bigint;
     username: string;
-    avatar: string;
   };
   _count?: {
-    likes: number,
-    comments: number
-  }
+    likes: number;
+    comments: number;
+  };
 }
 
 type Props = {
-    post: PostType 
-    profileData: {
-      username: string;
-      avatar: string;
-      bio: string;
-    } | undefined
-}
+  post: PostType;
+  profileData:
+    | {
+        id: bigint;
+        username: string;
+        bio: string;
+      }
+    | undefined;
+};
 
-const ProfilePostCard = ( {post, profileData}: Props) => {
-    return (
-        <div className="card card-post">
-          <div className="relative min-w-12 min-h-12">
-            <Image
-              height={50}
-              width={50}
-              src={profileData!.avatar}
-              alt=""
-              priority
-              className="avatar rounded-full"
-              unoptimized
-              ></Image>
-          </div>
-          
-            <div className="flex flex-col gap-2 flex-grow-0">
-              <h1 className="font-semibold pt-2">{profileData?.username}</h1>
-              {post.content}
-              <div className="flex gap-2 py-2">
-                <Like postId={post.id} />
-                <CommentButton id={post.id} />
-              </div>
-            </div>
+const ProfilePostCard = ({ post, profileData }: Props) => {
+  return (
+    <div className="card card-post">
+      <div className="relative min-w-12 min-h-12">
+        <Avatar
+          name={String(profileData!.id)}
+          size={50}
+          colors={["#d7eaff", "#ff8580", "#9ba0ff", "#b2ffd8"]}
+        />
+      </div>
+
+      <div className="flex flex-col gap-2 flex-grow-0">
+        <h1 className="font-semibold pt-2">{profileData?.username}</h1>
+        {post.content}
+        <div className="flex gap-2 py-2">
+          <Like postId={post.id} />
+          <CommentButton id={post.id} />
         </div>
-    )
-    
+      </div>
+    </div>
+  );
+};
 
-}
-
-export default ProfilePostCard
+export default ProfilePostCard;
